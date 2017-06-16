@@ -50,6 +50,10 @@
       <Project>{C20F920A-F77B-4AEE-8C55-F1E8DC0DD755}</Project>
       <Name>Entitites</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{7F6459EE-6F7F-4891-B54B-6D9ABB7B3B3D}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Helpers.csproj">
       <Project>{EA498B53-B2AA-4F6D-914F-A5FDD04819A8}</Project>
       <Name>Helpers</Name>

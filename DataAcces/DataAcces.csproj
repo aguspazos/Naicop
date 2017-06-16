@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F6459EE-6F7F-4891-B54B-6D9ABB7B3B3D}</ProjectGuid>
+    <ProjectGuid>{A503C337-C7B9-492F-91E8-26B28ACD696B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Repository</RootNamespace>
-    <AssemblyName>Repository</AssemblyName>
+    <RootNamespace>DataAcces</RootNamespace>
+    <AssemblyName>DataAcces</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,17 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericRepository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAcces\DataAcces.csproj">
-      <Project>{A503C337-C7B9-492F-91E8-26B28ACD696B}</Project>
-      <Name>DataAcces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entitites\Entitites.csproj">
       <Project>{C20F920A-F77B-4AEE-8C55-F1E8DC0DD755}</Project>
       <Name>Entitites</Name>

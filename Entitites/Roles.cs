@@ -10,5 +10,7 @@ namespace Entitites
     {
         public const  int ADMIN = 1;
         public const int CLIENT_USER = 2;
+        public const int USER = 3;
+        public const int SECURTY_USER = 4;
     }
 }
