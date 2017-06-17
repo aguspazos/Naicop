@@ -1,0 +1,12 @@
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\Utils.dll.config
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\Utils.dll
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\Utils.pdb
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\Entitites.dll
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\EntityFramework.dll
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\Entitites.pdb
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\EntityFramework.xml
+C:\Users\pazos\Documents\Naicop\Utils\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\pazos\Documents\Naicop\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
+C:\Users\pazos\Documents\Naicop\Utils\obj\Debug\Utils.dll
+C:\Users\pazos\Documents\Naicop\Utils\obj\Debug\Utils.pdb

@@ -14,12 +14,12 @@ namespace Helpers
 
         public static  Authentication  GetCurrentAuthenticated()
         {
-            return (Authentication) HttpContext.Current.Session[USER_SESSION_NAME];
+            return (Authentication)HttpContext.Current.Session[USER_SESSION_NAME];
         }
 
         public static void SetCurrentAuthenticated(Authentication authentication)
         {
-            HttpContext.Current.Session[USER_SESSION_NAME] = authentication;
+            HttpContext.Current.Session.Add(USER_SESSION_NAME, authentication);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Entitites;
 using Services;
+using Services.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +13,58 @@ namespace NaicopServer.Controllers
     public class AdminController : ApiController
     {
         private AdminService adminService;
+        private IAuthenticationService authenticationService;
         public AdminController()
         {
             adminService = new AdminService();
+            authenticationService = new AuthenticationService();
         }
         public AdminController(AdminService adminService)
         {
             this.adminService = adminService;
+            this.authenticationService = new AuthenticationService();
         }
 
-        [Route("api/admins/login")]
-        [HttpGet]
-        public IHttpActionResult login(string email,string password)
+        [Route("api/admins/Login")]
+        [HttpPost]
+        public IHttpActionResult login(Admin adminToLog)
         {
-            Admin admin = adminService.Login(email, password);
+
+
+            Admin admin = adminService.Login(adminToLog.Email, adminToLog.Password);
             if (admin == null)
+            {
                 return NotFound();
+            }
             else
+            {
+                authenticationService.Log(admin);
                 return Ok(admin);
+            }
         }
+
+        [Route("api/admins")]
+        [HttpPost]
+        public IHttpActionResult Post(Admin admin)
+        {
+            admin.Role = Roles.ADMIN;
+            Admin newAdmin = adminService.CreateAdmin(admin);
+            if (authenticationService.CheckPermission(Roles.ADMIN))
+            {
+
+                if (newAdmin == null)
+                    return NotFound();
+                else
+                    return Ok(admin);
+            }
+            else {
+                return Ok("CONCAs");
+            }
+
+        }
+
+
+
         // GET: api/Admin
         public IEnumerable<string> Get()
         {

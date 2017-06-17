@@ -13,6 +13,9 @@ namespace Repository
         private Context context;
         private GenericRepository<User> userRepository;
         private GenericRepository<Admin> adminRepository;
+        private GenericRepository<ClientUser> clientUserRepository;
+        private GenericRepository<Event> eventRepository;
+
         public UnitOfWork()
         {
             context = new Context();
@@ -26,58 +29,11 @@ namespace Repository
         {
             get
             {
-                if (this.userRepository == null)
+               if (this.userRepository == null)
                 {
                     this.userRepository = new GenericRepository<User>(context);
                 }
                 return userRepository;
-            }
-        }
-
-        public IRepository<Stock> StockRepository
-        {
-            get
-            {
-                if (this.stockRepository == null)
-                {
-                    this.stockRepository = new GenericRepository<Stock>(context);
-                }
-                return stockRepository;
-            }
-        }
-
-        public IRepository<Price> PriceRepository
-        {
-            get
-            {
-                if (this.priceRepository == null)
-                {
-                    this.priceRepository = new GenericRepository<Price>(context);
-                }
-                return priceRepository;
-            }
-        }
-        public IRepository<Transaction> TransactionRepository
-        {
-            get
-            {
-                if (this.transactionRepository == null)
-                {
-                    this.transactionRepository = new GenericRepository<Transaction>(context);
-                }
-                return transactionRepository;
-            }
-        }
-
-        public IRepository<UserStocks> UserStocksRepository
-        {
-            get
-            {
-                if (this.userStocksRepository == null)
-                {
-                    userStocksRepository = new GenericRepository<UserStocks>(context);
-                }
-                return userStocksRepository;
             }
         }
 
@@ -92,41 +48,31 @@ namespace Repository
                 return adminRepository;
             }
         }
+        public IRepository<ClientUser> ClientUserRepository
+        {
+            get
+            {
+                if (this.clientUserRepository == null)
+                    clientUserRepository = new GenericRepository<ClientUser>(context);
 
-        public IRepository<News> NewsRepository
-        {
-            get
-            {
-                if (this.newsRepository == null)
-                {
-                    newsRepository = new GenericRepository<News>(context);
-                }
-                return newsRepository;
+                return clientUserRepository;
+
             }
         }
-        public IRepository<GameRules> GameRulesRepository
+        public IRepository<Event> EventRepository
         {
             get
             {
-                if (this.gameRulesRepository == null)
-                {
-                    gameRulesRepository = new GenericRepository<GameRules>(context);
-                }
-                return gameRulesRepository;
+                if (this.eventRepository == null)
+                    eventRepository = new GenericRepository<Event>(context);
+
+                return eventRepository;
+
             }
         }
 
-        public IRepository<Log> LoggerRepository
-        {
-            get
-            {
-                if (this.loggerRepository == null)
-                {
-                    loggerRepository = new GenericRepository<Log>(context);
-                }
-                return loggerRepository;
-            }
-        }
+
+
         public void Save()
         {
             context.SaveChanges();

@@ -1,0 +1,14 @@
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\Repository.dll.config
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\Repository.dll
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\Repository.pdb
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\DataAcces.dll
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\Entitites.dll
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\EntityFramework.dll
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\DataAcces.pdb
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\Entitites.pdb
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\EntityFramework.xml
+C:\Users\pazos\Documents\Naicop\Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\pazos\Documents\Naicop\Repository\obj\Debug\Repository.csprojResolveAssemblyReference.cache
+C:\Users\pazos\Documents\Naicop\Repository\obj\Debug\Repository.dll
+C:\Users\pazos\Documents\Naicop\Repository\obj\Debug\Repository.pdb

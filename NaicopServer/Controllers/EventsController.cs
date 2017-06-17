@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Entitites;
+using Newtonsoft.Json.Linq;
+using Services;
+using Services.Implementations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,33 +11,46 @@ using System.Web.Http;
 
 namespace NaicopServer
 {
-    public class ValuesController1 : ApiController
+    public class EventsController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+
+
+        private IEventService eventService;
+        private IAuthenticationService authenticationService;
+
+        public EventsController()
         {
-            return new string[] { "value1", "value2" };
+            eventService = new EventService();
+            authenticationService = new Services.Implementations.AuthenticationService();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/events/")]
+        [HttpPost]
+        public IHttpActionResult Post(JObject jsonEvent)
         {
-        }
+            Event newEvent = new Event()
+            {
+                Title = jsonEvent["title"].Value<string>(),
+                Description = jsonEvent["description"].Value<string>(),
+                Latitude = jsonEvent["latitude"].Value<string>(),
+                Longitude = jsonEvent["longitude"].Value<string>(),
+                MaxCapacity = jsonEvent["max_capacity"].Value<int>(),
+                ClientUserId = jsonEvent["client_user_id"].Value<int>()
+            };
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            string image = jsonEvent["image"].Value<string>() ;
+            string imageName = jsonEvent["image_name"].Value<string>();
+            Event myEvent = eventService.CreateEvent(newEvent,image,imageName);
+            if (myEvent == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(myEvent);
+            }
         }
     }
 }

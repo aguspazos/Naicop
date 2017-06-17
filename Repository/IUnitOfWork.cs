@@ -11,6 +11,8 @@ namespace Repository
     {
         IRepository<User> UserRepository { get; }
         IRepository<Admin> AdminRepository { get; }
+        IRepository<ClientUser> ClientUserRepository { get; }
+        IRepository<Event> EventRepository { get; }
 
 
         void Save();
