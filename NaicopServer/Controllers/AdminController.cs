@@ -71,7 +71,7 @@ namespace NaicopServer.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Admin/5
+        // GET: api/Admin/id
         public string Get(int id)
         {
             return "value";
@@ -82,12 +82,12 @@ namespace NaicopServer.Controllers
         {
         }
 
-        // PUT: api/Admin/5
+        // PUT: api/Admin/id
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Admin/5
+        // DELETE: api/Admin/id
         public void Delete(int id)
         {
         }

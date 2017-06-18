@@ -10,3 +10,15 @@ C:\Users\pazos\Documents\Naicop\DataAcces\bin\Debug\EntityFramework.SqlServer.xm
 C:\Users\pazos\Documents\Naicop\DataAcces\obj\Debug\DataAcces.csprojResolveAssemblyReference.cache
 C:\Users\pazos\Documents\Naicop\DataAcces\obj\Debug\DataAcces.dll
 C:\Users\pazos\Documents\Naicop\DataAcces\obj\Debug\DataAcces.pdb
+F:\Documents\Naicop\DataAcces\bin\Debug\DataAcces.dll.config
+F:\Documents\Naicop\DataAcces\bin\Debug\DataAcces.dll
+F:\Documents\Naicop\DataAcces\bin\Debug\DataAcces.pdb
+F:\Documents\Naicop\DataAcces\bin\Debug\Entitites.dll
+F:\Documents\Naicop\DataAcces\bin\Debug\EntityFramework.dll
+F:\Documents\Naicop\DataAcces\bin\Debug\EntityFramework.SqlServer.dll
+F:\Documents\Naicop\DataAcces\bin\Debug\Entitites.pdb
+F:\Documents\Naicop\DataAcces\bin\Debug\EntityFramework.xml
+F:\Documents\Naicop\DataAcces\bin\Debug\EntityFramework.SqlServer.xml
+F:\Documents\Naicop\DataAcces\obj\Debug\DataAcces.csprojResolveAssemblyReference.cache
+F:\Documents\Naicop\DataAcces\obj\Debug\DataAcces.dll
+F:\Documents\Naicop\DataAcces\obj\Debug\DataAcces.pdb

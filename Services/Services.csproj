@@ -52,13 +52,21 @@
   <ItemGroup>
     <Compile Include="IAdminService.cs" />
     <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="ICategoryService.cs" />
     <Compile Include="IEventService.cs" />
     <Compile Include="Implementations\AdminService.cs" />
     <Compile Include="Implementations\AuthenticationService.cs" />
+    <Compile Include="Implementations\CategoryService.cs" />
     <Compile Include="Implementations\EventService.cs" />
+    <Compile Include="Implementations\QrCodeService.cs" />
+    <Compile Include="Implementations\SecurityClientService.cs" />
+    <Compile Include="Implementations\TicketService.cs" />
+    <Compile Include="IQrCodeService.cs" />
+    <Compile Include="ITicketService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implementations\UserService.cs" />
+    <Compile Include="ISecurityClientService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entitites\Entitites.csproj">

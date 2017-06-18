@@ -12,3 +12,17 @@ C:\Users\pazos\Documents\Naicop\Repository\bin\Release\EntityFramework.SqlServer
 C:\Users\pazos\Documents\Naicop\Repository\obj\Release\Repository.csprojResolveAssemblyReference.cache
 C:\Users\pazos\Documents\Naicop\Repository\obj\Release\Repository.dll
 C:\Users\pazos\Documents\Naicop\Repository\obj\Release\Repository.pdb
+F:\Documents\Naicop\Repository\bin\Release\Repository.dll.config
+F:\Documents\Naicop\Repository\bin\Release\Repository.dll
+F:\Documents\Naicop\Repository\bin\Release\Repository.pdb
+F:\Documents\Naicop\Repository\bin\Release\DataAcces.dll
+F:\Documents\Naicop\Repository\bin\Release\Entitites.dll
+F:\Documents\Naicop\Repository\bin\Release\EntityFramework.dll
+F:\Documents\Naicop\Repository\bin\Release\EntityFramework.SqlServer.dll
+F:\Documents\Naicop\Repository\bin\Release\DataAcces.pdb
+F:\Documents\Naicop\Repository\bin\Release\Entitites.pdb
+F:\Documents\Naicop\Repository\bin\Release\EntityFramework.xml
+F:\Documents\Naicop\Repository\bin\Release\EntityFramework.SqlServer.xml
+F:\Documents\Naicop\Repository\obj\Release\Repository.csprojResolveAssemblyReference.cache
+F:\Documents\Naicop\Repository\obj\Release\Repository.dll
+F:\Documents\Naicop\Repository\obj\Release\Repository.pdb
