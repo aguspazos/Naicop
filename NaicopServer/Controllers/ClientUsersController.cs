@@ -13,12 +13,12 @@ namespace NaicopServer.Controllers
 
 
 
-        // PUT api/<controller>/5
+        // PUT api/<controller>/id
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/<controller>/5
+        // DELETE api/<controller>/id
         public void Delete(int id)
         {
         }

@@ -10,3 +10,15 @@ C:\Users\pazos\Documents\Naicop\Utils\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\pazos\Documents\Naicop\Utils\obj\Release\Utils.csprojResolveAssemblyReference.cache
 C:\Users\pazos\Documents\Naicop\Utils\obj\Release\Utils.dll
 C:\Users\pazos\Documents\Naicop\Utils\obj\Release\Utils.pdb
+F:\Documents\Naicop\Utils\bin\Release\Utils.dll.config
+F:\Documents\Naicop\Utils\bin\Release\Utils.dll
+F:\Documents\Naicop\Utils\bin\Release\Utils.pdb
+F:\Documents\Naicop\Utils\bin\Release\Entitites.dll
+F:\Documents\Naicop\Utils\bin\Release\EntityFramework.dll
+F:\Documents\Naicop\Utils\bin\Release\EntityFramework.SqlServer.dll
+F:\Documents\Naicop\Utils\bin\Release\Entitites.pdb
+F:\Documents\Naicop\Utils\bin\Release\EntityFramework.xml
+F:\Documents\Naicop\Utils\bin\Release\EntityFramework.SqlServer.xml
+F:\Documents\Naicop\Utils\obj\Release\Utils.csprojResolveAssemblyReference.cache
+F:\Documents\Naicop\Utils\obj\Release\Utils.dll
+F:\Documents\Naicop\Utils\obj\Release\Utils.pdb

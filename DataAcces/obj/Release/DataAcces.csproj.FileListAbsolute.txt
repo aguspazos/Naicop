@@ -10,3 +10,15 @@ C:\Users\pazos\Documents\Naicop\DataAcces\bin\Release\EntityFramework.SqlServer.
 C:\Users\pazos\Documents\Naicop\DataAcces\obj\Release\DataAcces.csprojResolveAssemblyReference.cache
 C:\Users\pazos\Documents\Naicop\DataAcces\obj\Release\DataAcces.dll
 C:\Users\pazos\Documents\Naicop\DataAcces\obj\Release\DataAcces.pdb
+F:\Documents\Naicop\DataAcces\bin\Release\DataAcces.dll.config
+F:\Documents\Naicop\DataAcces\bin\Release\DataAcces.dll
+F:\Documents\Naicop\DataAcces\bin\Release\DataAcces.pdb
+F:\Documents\Naicop\DataAcces\bin\Release\Entitites.dll
+F:\Documents\Naicop\DataAcces\bin\Release\EntityFramework.dll
+F:\Documents\Naicop\DataAcces\bin\Release\EntityFramework.SqlServer.dll
+F:\Documents\Naicop\DataAcces\bin\Release\Entitites.pdb
+F:\Documents\Naicop\DataAcces\bin\Release\EntityFramework.xml
+F:\Documents\Naicop\DataAcces\bin\Release\EntityFramework.SqlServer.xml
+F:\Documents\Naicop\DataAcces\obj\Release\DataAcces.csprojResolveAssemblyReference.cache
+F:\Documents\Naicop\DataAcces\obj\Release\DataAcces.dll
+F:\Documents\Naicop\DataAcces\obj\Release\DataAcces.pdb

@@ -8,3 +8,13 @@ C:\Users\pazos\Documents\Naicop\Entitites\bin\Release\EntityFramework.SqlServer.
 C:\Users\pazos\Documents\Naicop\Entitites\obj\Release\Entitites.csprojResolveAssemblyReference.cache
 C:\Users\pazos\Documents\Naicop\Entitites\obj\Release\Entitites.dll
 C:\Users\pazos\Documents\Naicop\Entitites\obj\Release\Entitites.pdb
+F:\Documents\Naicop\Entitites\bin\Release\Entitites.dll.config
+F:\Documents\Naicop\Entitites\bin\Release\Entitites.dll
+F:\Documents\Naicop\Entitites\bin\Release\Entitites.pdb
+F:\Documents\Naicop\Entitites\bin\Release\EntityFramework.dll
+F:\Documents\Naicop\Entitites\bin\Release\EntityFramework.SqlServer.dll
+F:\Documents\Naicop\Entitites\bin\Release\EntityFramework.xml
+F:\Documents\Naicop\Entitites\bin\Release\EntityFramework.SqlServer.xml
+F:\Documents\Naicop\Entitites\obj\Release\Entitites.csprojResolveAssemblyReference.cache
+F:\Documents\Naicop\Entitites\obj\Release\Entitites.dll
+F:\Documents\Naicop\Entitites\obj\Release\Entitites.pdb

@@ -15,6 +15,10 @@ namespace Repository
         private GenericRepository<Admin> adminRepository;
         private GenericRepository<ClientUser> clientUserRepository;
         private GenericRepository<Event> eventRepository;
+        private GenericRepository<Category> categoryRepository;
+        private GenericRepository<QrCode> qrCodeRepository;
+        private GenericRepository<SecurityClient> securityClientRepository;
+        private GenericRepository<Ticket> ticketRepository;
 
         public UnitOfWork()
         {
@@ -71,7 +75,49 @@ namespace Repository
             }
         }
 
+        public IRepository<Category> CategoryRepository
+        {
+            get
+            {
+                if (this.categoryRepository == null)
+                    categoryRepository = new GenericRepository<Category>(context);
 
+                return categoryRepository;
+            }
+        }
+
+        public IRepository<QrCode> QrCodeRepository
+        {
+            get
+            {
+                if (this.qrCodeRepository == null)
+                    qrCodeRepository = new GenericRepository<QrCode>(context);
+
+                return qrCodeRepository;
+            }
+        }
+
+        public IRepository<SecurityClient> SecurityClientRepository
+        {
+            get
+            {
+                if (this.securityClientRepository == null)
+                    securityClientRepository = new GenericRepository<SecurityClient>(context);
+
+                return securityClientRepository;
+            }
+        }
+
+        public IRepository<Ticket> TicketRepository
+        {
+            get
+            {
+                if (this.ticketRepository == null)
+                    ticketRepository = new GenericRepository<Ticket>(context);
+
+                return ticketRepository;
+            }
+        }
 
         public void Save()
         {

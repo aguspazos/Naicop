@@ -13,8 +13,10 @@ namespace Repository
         IRepository<Admin> AdminRepository { get; }
         IRepository<ClientUser> ClientUserRepository { get; }
         IRepository<Event> EventRepository { get; }
-
-
+        IRepository<Category> CategoryRepository { get; }
+        IRepository<QrCode> QrCodeRepository { get; }
+        IRepository<SecurityClient> SecurityClientRepository { get; }
+        IRepository<Ticket> TicketRepository { get; }
         void Save();
     }
 }
