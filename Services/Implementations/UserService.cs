@@ -22,7 +22,7 @@ namespace Services.Implementations
         }
         public User Login(string email,string password)
         {
-            IEnumerable<User> users = unitOfWork.UserRepository.Get((u => u.Email == email));
+            IEnumerable<User> users = unitOfWork.UserRepository.Get((u => u.Email == email && u.Password.Equals(password)));
 
             if(users.Count() > 0)
             {
