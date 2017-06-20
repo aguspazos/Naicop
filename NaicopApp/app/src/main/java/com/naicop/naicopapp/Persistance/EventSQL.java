@@ -31,7 +31,7 @@ public class EventSQL {
     public static Pair<Integer,String> startDate = new Pair<>(9,"startDate");
     public static Pair<Integer,String> endDate = new Pair<>(10,"endDate");
     public static Pair<Integer,String> price = new Pair<>(11,"price");
-    public static Pair<Integer,String> deleted = new Pair<>(12,"description");
+    public static Pair<Integer,String> deleted = new Pair<>(12,"deleted");
 
 
     public static final String TABLE_NAME = "Event";

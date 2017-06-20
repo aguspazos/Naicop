@@ -43,7 +43,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void createDatabase(SQLiteDatabase db){
+
         db.execSQL(CategorySQL.CREATION_STRING);
+        db.execSQL(EventSQL.CREATION_STRING);
     }
 
     @Override
