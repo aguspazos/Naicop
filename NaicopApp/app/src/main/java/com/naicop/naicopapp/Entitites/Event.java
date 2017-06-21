@@ -25,6 +25,15 @@ public class Event {
     public double price;
     public boolean deleted;
 
+    public Event(String lat, String lng, String name, double price, String description, String startDate){
+        latitude = lat;
+        longitude = lng;
+        title = name;
+        this.price = price;
+        this.description = description;
+        this.startDate = startDate;
+    }
+
     public Event(Cursor modelCursor){
         this.id = modelCursor.getInt(EventSQL._id.first);
         this.title = modelCursor.getString(EventSQL.title.first);
