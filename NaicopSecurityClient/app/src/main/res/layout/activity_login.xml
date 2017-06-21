@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.naicop.naicopsecurityclient.Activities.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.85">
+
+            <LinearLayout
+                android:id="@+id/inputContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="90dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/round_corner">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mail_icon" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/emailText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:height="50dp"
+                        android:background="@drawable/edit_text_border"
+                        android:gravity="center_vertical"
+                        android:hint="Email"
+                        android:paddingLeft="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/round_corner">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mail_icon" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/passwordText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:height="50dp"
+                        android:background="@drawable/edit_text_border"
+                        android:gravity="center_vertical"
+                        android:hint="Password"
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_below="@+id/inputContainer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/loginButton"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/round_corner_button"
+                    android:gravity="center"
+                    android:text="Iniciar Sesion"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
