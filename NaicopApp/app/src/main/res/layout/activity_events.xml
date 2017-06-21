@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1"
         >
         <include
             layout="@layout/menu_bar"
@@ -20,13 +19,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="85"
+            android:layout_weight="0.85"
             android:orientation="vertical"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="20dp"
+                android:id="@+id/filterCategoriesButtonContainer"
                 >
                 <TextView
                     android:layout_width="match_parent"
@@ -39,13 +39,7 @@
 
                     />
             </LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/filterCategoriesContainer"
-                >
 
-            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,76 +54,147 @@
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:orientation="horizontal"
                     android:weightSum="3"
                     android:id="@+id/orderTagsContainer"
                     >
+
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/orderByNameTag"
+                        android:id="@+id/orderByTitleTag"
+                        android:background="@android:color/darker_gray"
+                        android:paddingRight="1dp"
+                        android:paddingLeft="1dp"
                         >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Nombre"
-                            android:textColor="@android:color/white"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#32539F"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Nombre"
+                                android:textColor="@android:color/white"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:background="@android:color/white"
+                            android:layout_alignParentBottom="true"
+                            android:id="@+id/orderByTitleSelectedTab"
+                            android:visibility="gone"
+                            ></RelativeLayout>
+
+
                     </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:id="@+id/orderByDateTag"
+                        android:background="@android:color/darker_gray"
+                        android:paddingRight="1dp"
                         >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:textColor="@android:color/white"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:text="Fecha"
-                            />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#32539F"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:text="Fecha"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@android:color/white"
+                            android:id="@+id/orderByDateSelectedTab"
+                            android:visibility="gone"
+                            ></RelativeLayout>
                     </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:id="@+id/orderByPriceTag"
+                        android:background="@android:color/darker_gray"
+                        android:paddingRight="1dp"
                         >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:textColor="@android:color/white"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:text="Precio"
-                            />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#32539F"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:text="Precio"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:background="@android:color/white"
+                            android:layout_alignParentBottom="true"
+                            android:id="@+id/orderByPriceSelectedTag"
+                            android:visibility="gone"
+                            ></RelativeLayout>
                     </RelativeLayout>
 
                 </LinearLayout>
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="40dp"
                     android:id="@+id/eventsList"
                     >
 
                 </ListView>
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:clickable="true"
+                android:alpha="0.3"
+                android:visibility="gone"
+                android:id="@+id/opacity"
+                ></RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/filterCategoriesContainer"
+                android:layout_below="@+id/filterCategoriesButtonContainer"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

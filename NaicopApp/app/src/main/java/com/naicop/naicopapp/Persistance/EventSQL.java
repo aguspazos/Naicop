@@ -14,6 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by pazos on 20-Jun-17.
@@ -31,7 +34,7 @@ public class EventSQL {
     public static Pair<Integer,String> startDate = new Pair<>(9,"startDate");
     public static Pair<Integer,String> endDate = new Pair<>(10,"endDate");
     public static Pair<Integer,String> price = new Pair<>(11,"price");
-    public static Pair<Integer,String> deleted = new Pair<>(12,"description");
+    public static Pair<Integer,String> deleted = new Pair<>(12,"deleted");
 
 
     public static final String TABLE_NAME = "Event";
@@ -137,11 +140,34 @@ public class EventSQL {
 
     }
 
-    public static ArrayList<Event> getAll() {
+    public static ArrayList<Event>getAllOrdered(String orderBy,int category){
+        String whereClause = deleted.second+"=0 AND "+EventSQL.categoryId.second+" = ?";
+        String[] whereArgs = {category + ""};
+        SQLiteDatabase db = DatabaseHelper.getInstance().getReadableDatabase();
+        Cursor modelCursor = db.query(TABLE_NAME, new String[]{"*"}, whereClause, whereArgs, "", "", orderBy);
+        return toList(modelCursor);
+    }
+    public static ArrayList<Event>getAllOrdered(String orderBy){
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+deleted.second + "=0 order by "+orderBy;
+        Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query, null);
+        return toList(modelCursor);
+    }
 
+    public static ArrayList<Event> getAllActive() {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+deleted.second + "=0";
         Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query, null);
+        return toList(modelCursor);
+    }
 
+    public static ArrayList<Event> getAllActiveFromCategory(int categoryId){
+        String whereClause = deleted.second+"=0 AND "+EventSQL.categoryId.second+" = ?";
+        String[] whereArgs = {categoryId + ""};
+        String orderBy = EventSQL.startDate.second+" DESC";
+        SQLiteDatabase db = DatabaseHelper.getInstance().getReadableDatabase();
+        Cursor modelCursor = db.query(TABLE_NAME, new String[]{"*"}, whereClause, whereArgs, "", "", orderBy);
+        return toList(modelCursor);
+    }
+    private static ArrayList<Event> toList(Cursor modelCursor){
         ArrayList<Event> list = new ArrayList();
 
         if (modelCursor.moveToFirst()) {
@@ -155,7 +181,6 @@ public class EventSQL {
 
         return list;
     }
-
     public static Event get(int id) {
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EventSQL._id.second + "=" + id;

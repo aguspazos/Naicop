@@ -12,10 +12,13 @@ import org.json.JSONObject;
  */
 public class Category {
 
+    public static final int ALL_ID = -1;
+
     public int id;
     public String name;
     public boolean deleted;
 
+    public Category(){}
     public Category(Cursor modelCursor){
         this.id = modelCursor.getInt(CategorySQL._id.first);
         this.name = modelCursor.getString(CategorySQL.name.first);
