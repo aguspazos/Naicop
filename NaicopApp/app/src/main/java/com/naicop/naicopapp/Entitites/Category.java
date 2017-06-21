@@ -26,5 +26,4 @@ public class Category {
         this.name = jsonCategory.getString("Name");
         this.deleted = jsonCategory.has("Deleted") && jsonCategory.getInt("Deleted") == 1;
     }
-
 }
