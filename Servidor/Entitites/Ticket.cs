@@ -10,14 +10,20 @@ namespace Entitites
 {
     public class Ticket
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        public int EventId { get; set; }
-        
-        public int StandardRefId { get; set; }
-
+        public int EventID { get; set; }
+        public int UserID { get; set; }
+        public string QrImageUrl { get; set; }
+        public int Used { get; set; }
+        public string Code { get; set; }
+        public DateTime UpdatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public TicketStatus Status { get; set; }
+        public int Deleted { get; set; }
 
     }
 }
