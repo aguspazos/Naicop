@@ -1,0 +1,10 @@
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\Entitites.dll.config
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\Entitites.dll
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\Entitites.pdb
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\EntityFramework.dll
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\EntityFramework.SqlServer.dll
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\EntityFramework.xml
+F:\Documents\Naicop\Servidor\Entitites\bin\Debug\EntityFramework.SqlServer.xml
+F:\Documents\Naicop\Servidor\Entitites\obj\Debug\Entitites.csprojResolveAssemblyReference.cache
+F:\Documents\Naicop\Servidor\Entitites\obj\Debug\Entitites.dll
+F:\Documents\Naicop\Servidor\Entitites\obj\Debug\Entitites.pdb

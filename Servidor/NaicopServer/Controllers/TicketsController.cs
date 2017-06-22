@@ -1,6 +1,8 @@
 ﻿using Entitites;
+using Newtonsoft.Json.Linq;
 using Services;
 using Services.Implementations;
+using NaicopServer.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,12 @@ namespace NaicopServer.Controllers
     public class TicketsController : ApiController
     {
         private ITicketService ticketService;
+        private ISecurityClientService securityClientService;
 
         public TicketsController()
         {
             this.ticketService = new TicketService();
+            this.securityClientService = new SecurityClientService();
         }
 
         // GET api/<controller>/id
@@ -31,6 +35,31 @@ namespace NaicopServer.Controllers
         {
             Ticket newTicket = ticketService.CreateTicket(ticket);
             return Ok(newTicket);
+
+        }
+
+        // POST api/<controller>
+        [Route("api/tickets")]
+        [HttpPost]
+        public IHttpActionResult CheckTicketFromQrCode(JObject jsonObject)
+        {
+            JsonResponse<string> response = new JsonResponse<string>();
+            var securityClientToken = jsonObject["token"].Value<string>();
+            var ticketCode = jsonObject["code"].Value<string>();
+            var securityClient = securityClientService.GetByToken(securityClientToken);
+            if(securityClient != null)
+            {
+                Ticket ticket = ticketService.GetByCode(ticketCode);
+                //if(ticket)
+                return Ok(ticket);
+            }
+            else
+            {
+                response.status = "Error";
+                response.Entity = "Permiso de escaneo denegado";
+                return Ok(response);
+            }
+            
 
         }
 

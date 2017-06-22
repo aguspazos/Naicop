@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entitites
 {
-    public class SecurityClient
+    public class SecurityClient : Authentication
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

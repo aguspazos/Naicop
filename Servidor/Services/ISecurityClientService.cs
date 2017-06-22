@@ -11,5 +11,6 @@ namespace Services
     {
         SecurityClient CreateSecurityClient(SecurityClient securityClient);
         SecurityClient Login(string email, string password);
+        SecurityClient GetByToken(string token);
     }
 }

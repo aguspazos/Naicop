@@ -10,5 +10,8 @@ namespace Services
     public interface ITicketService
     {
         Ticket CreateTicket(Ticket ticket);
+
+        Ticket GetByCode(string code);
+        
     }
 }

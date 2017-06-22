@@ -1,4 +1,5 @@
 ﻿using Entitites;
+using Entitites.Exceptions;
 using NaicopServer.Dtos;
 using Services;
 using Services.Implementations;
@@ -43,7 +44,7 @@ namespace NaicopServer.Controllers
             {
                 return Ok(new JsonResponse<string>()
                 {
-                    status = "Ok",
+                    Status = "Ok",
                     Entity = token
                 });
             }
@@ -74,20 +75,31 @@ namespace NaicopServer.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]User user)
         {
+            try
+            {
+                user.Role = Roles.USER;
+                User newUser = userService.CreateUser(user);
+                return Ok(new JsonResponse<User>("Ok",user));
+            }catch(UserException ex)
+            {
+                return Ok(new JsonResponse<string>("Error",ex.Message));
+            }
+
+        }
+        [Route("api/users/facebookLogin")]
+        [HttpPost]
+        public IHttpActionResult FacebookLogin([FromBody]User user)
+        {
             user.Role = Roles.USER;
-            User newUser = userService.CreateUser(user);
-            return Ok(user);
-
+            try
+            {
+                User newUser = userService.FacebookLogin(user);
+                return Ok(new JsonResponse<User>("Ok",user));
+            }catch(UserException ex)
+            {
+                return Ok(new JsonResponse<string>("Error", ex.Message));
+            }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }

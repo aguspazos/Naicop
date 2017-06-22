@@ -13,6 +13,11 @@ namespace NaicopServer
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            HttpConfiguration config = GlobalConfiguration.Configuration;
+
+            config.Formatters.JsonFormatter
+                        .SerializerSettings
+                        .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
         protected void Application_PostAuthorizeRequest()
         {
@@ -26,6 +31,7 @@ namespace NaicopServer
         {
             return HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith(WebApiConfig.UrlPrefixRelative);
         }
+
 
     }
 }
