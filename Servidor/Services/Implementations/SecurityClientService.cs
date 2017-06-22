@@ -22,6 +22,22 @@ namespace Services.Implementations
         {
             this.unitOfWork = unitOfWork;
         }
+
+        public SecurityClient Login(string email,string password)
+        {
+            IEnumerable<SecurityClient> securityClients = unitOfWork.SecurityClientRepository.Get((sc => sc.Email == email && sc.Password.Equals(password)));
+
+            if (securityClients.Count() > 0)
+            {
+                string token = Guid.NewGuid().ToString();
+                SecurityClient securityClient = securityClients.First();
+                securityClient.Token = token;
+                unitOfWork.Save();
+
+                return securityClient;
+            }
+            return null;
+        }
         public SecurityClient CreateSecurityClient(SecurityClient securityClient)
         {
             unitOfWork.SecurityClientRepository.Insert(securityClient);

@@ -10,5 +10,6 @@ namespace Services
     public interface ISecurityClientService
     {
         SecurityClient CreateSecurityClient(SecurityClient securityClient);
+        SecurityClient Login(string email, string password);
     }
 }
