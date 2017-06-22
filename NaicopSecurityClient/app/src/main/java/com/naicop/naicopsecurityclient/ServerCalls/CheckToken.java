@@ -1,9 +1,8 @@
-package com.naicop.naicopapp.ServerCalls;
+package com.naicop.naicopsecurityclient.ServerCalls;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,11 +10,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.naicop.naicopapp.Activities.EventsActivity;
-import com.naicop.naicopapp.Activities.LoginActivity;
-import com.naicop.naicopapp.Config.Config;
-import com.naicop.naicopapp.Config.Constants;
-import com.naicop.naicopapp.Persistance.DatabaseHelper;
+import com.naicop.naicopsecurityclient.Activities.LoginActivity;
+import com.naicop.naicopsecurityclient.Config.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,10 +21,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by pazos on 17-Jun-17.
+ * Created by Martin on 21/06/2017.
  */
-public abstract class CheckToken {
 
+public abstract class CheckToken {
     Activity activity;
     Context context;
     Map<String, String> params;
@@ -37,8 +33,8 @@ public abstract class CheckToken {
     public CheckToken(final Activity activity,String token) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
-        params = new HashMap<String, String>();
-//        params.put("token",token);
+        params = new HashMap<>();
+        params.put("token",token);
         String url = Constants.DOMAIN + "/api/users/checkToken/"+token;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -76,9 +72,10 @@ public abstract class CheckToken {
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
                                 }
+                                Log.v("Error - DATA", dataStr);
                             }
                         }
-                        Intent intent = new Intent(activity, EventsActivity.class);
+                        Intent intent = new Intent(activity, LoginActivity.class);
                         activity.startActivity(intent);
 
                     }

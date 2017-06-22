@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NaicopSecurityClient</string>
+    <string name="preferences">myPrefs</string>
+    <string name="token">token</string>
+</resources>

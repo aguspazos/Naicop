@@ -12,6 +12,7 @@ import com.naicop.naicopapp.R;
 public class LoadingActivity extends Activity {
 
     protected LoadingActivityHandler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
