@@ -12,13 +12,19 @@ namespace NaicopServer.Controllers
 {
     public class AdminController : ApiController
     {
-        private AdminService adminService;
+        private IAdminService adminService;
         private IAuthenticationService authenticationService;
         public AdminController()
         {
             adminService = new AdminService();
             authenticationService = new AuthenticationService();
         }
+        public AdminController(IAdminService adminService, IAuthenticationService authenticationService)
+        {
+            this.adminService = adminService;
+            this.authenticationService = authenticationService;
+        }
+
         public AdminController(AdminService adminService)
         {
             this.adminService = adminService;

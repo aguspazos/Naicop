@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    interface IUserService
+    public interface IUserService
     {
         User Login(string email, string password);
         User CreateUser(User user);
         User GetFromToken(string token);
+        User FacebookLogin(User user);
     }
 }

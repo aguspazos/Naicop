@@ -19,6 +19,12 @@ namespace NaicopServer.Controllers
             this.securityClientService = new SecurityClientService();
         }
 
+        public SecurityClientsController(ISecurityClientService securityClientService)
+        {
+            this.securityClientService = securityClientService;
+        }
+
+
         // GET api/<controller>/id
         public string Get(int id)
         {

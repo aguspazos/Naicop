@@ -29,6 +29,7 @@ public class LoginActivityHandler {
                 Config.updateSavedToken(activity,token);
                 Intent intent = MainActivity.getStartIntent(activity);
                 activity.startActivity(intent);
+                activity.finish();
             }
         };
     }

@@ -19,6 +19,11 @@ namespace NaicopServer.Controllers
             this.categoryService = new CategoryService();
         }
 
+        public CategoriesController(ICategoryService categoryService)
+        {
+            this.categoryService = categoryService;
+        }
+
         // GET api/<controller>/id
         public string Get(int id)
         {

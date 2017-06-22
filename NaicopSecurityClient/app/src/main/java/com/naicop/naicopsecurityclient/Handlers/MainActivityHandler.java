@@ -22,13 +22,6 @@ public class MainActivityHandler {
     }
 
     public void ValidateQrCode(String code){
-        final String token = Config.getSavedToken(activity);
-        if (token.equals("")){
-            Intent intent = LoginActivity.getStartIntent(activity);
-            activity.startActivity(intent);
-        }else {
-            new ScanQr(activity, token, code);
-        }
-
+        new ScanQr(activity, code);
     }
 }

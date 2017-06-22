@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace Services.Implementations
 {
@@ -21,6 +22,7 @@ namespace Services.Implementations
         {
             this.unitOfWork = unitOfWork;
         }
+
         public User Login(string email,string password)
         {
             IEnumerable<User> users = unitOfWork.UserRepository.Get((u => u.Email == email && u.Password.Equals(password)));
@@ -80,10 +82,7 @@ namespace Services.Implementations
         {
             if (user.FacebookID == null || user.FacebookID.Equals("0") || user.FacebookID.Equals(""))
             {
-                if(user.Password.Length< User.PASSWORD_MIN_LENGHT)
-                {
-                    throw new UserException("La contraseña debe ser de mas de "+User.PASSWORD_MIN_LENGHT+" caracteres");
-                }
+                IsValidUser(user);
             }
             
         }
@@ -96,6 +95,27 @@ namespace Services.Implementations
                 return users.First();
             }
             return null;
+        }
+
+        public bool IsValidUser(User user)
+        {
+
+            if (!HelperFunctions.IsValidEmail(user.Email))
+                throw new UserException("El formato del email es inválido");
+            if (!IsValidPassword(user.Password))
+                throw new UserException("La contraseña debe ser de 6 caracteres o más");
+            if (!HelperFunctions.IsEmptyString(user.Name))
+                throw new UserException("Nombre no puede ser vacío");
+            if (!HelperFunctions.IsEmptyString(user.LastName))
+                throw new UserException("Apellido no puede ser vacío");
+            if (!HelperFunctions.IsEmptyString(user.Name))
+                throw new UserException("Teléfono no puede ser vacío");
+            return true;
+        }
+
+        private bool IsValidPassword(string password)
+        {
+            return password.Count() > User.PASSWORD_MIN_LENGHT;
         }
     }
 

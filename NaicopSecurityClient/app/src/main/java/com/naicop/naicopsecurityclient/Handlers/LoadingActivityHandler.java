@@ -26,7 +26,7 @@ public class LoadingActivityHandler {
     public void checkToken(){
         final String token = Config.getSavedToken(activity);
         if (token.equals("")){
-            Intent intent = LoginActivity.getStartIntent(activity);
+            Intent intent = MainActivity.getStartIntent(activity);
             activity.startActivity(intent);
         }else {
             new CheckToken(activity, token) {
@@ -34,6 +34,7 @@ public class LoadingActivityHandler {
                 public void userLogged(JSONObject response) {
                     Intent intent = MainActivity.getStartIntent(activity);
                     activity.startActivity(intent);
+                    activity.finish();
                 }
 
                 @Override
@@ -41,6 +42,7 @@ public class LoadingActivityHandler {
                     Config.resetLastUpdated(activity);
                     Intent intent = LoginActivity.getStartIntent(activity);
                     activity.startActivity(intent);
+                    activity.finish();
                 }
             };
         }

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAcces", "DataAcces\DataAcces.csproj", "{A503C337-C7B9-492F-91E8-26B28ACD696B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Api.Test", "Web.Api.Test\Web.Api.Test.csproj", "{9DA1A732-05BB-4649-9854-554E6DB77E9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A503C337-C7B9-492F-91E8-26B28ACD696B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A503C337-C7B9-492F-91E8-26B28ACD696B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A503C337-C7B9-492F-91E8-26B28ACD696B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DA1A732-05BB-4649-9854-554E6DB77E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA1A732-05BB-4649-9854-554E6DB77E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA1A732-05BB-4649-9854-554E6DB77E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA1A732-05BB-4649-9854-554E6DB77E9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

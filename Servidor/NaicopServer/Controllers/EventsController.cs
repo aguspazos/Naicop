@@ -24,7 +24,10 @@ namespace NaicopServer
             authenticationService = new Services.Implementations.AuthenticationService();
         }
 
-
+        public EventsController(IEventService eventService)
+        {
+            this.eventService = eventService;
+        }
 
         [Route("api/events/")]
         [HttpPost]

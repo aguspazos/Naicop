@@ -16,13 +16,19 @@ namespace NaicopServer.Controllers
     public class UsersController : ApiController
     {
 
-        private UserService userService;
+        private IUserService userService;
         private IAuthenticationService authenticationService;
 
         public UsersController()
         {
             userService = new UserService();
             authenticationService = new Services.Implementations.AuthenticationService();
+        }
+
+        public UsersController(IUserService userService, IAuthenticationService authenticationService)
+        {
+            this.userService = userService;
+            this.authenticationService = authenticationService; 
         }
         // GET api/<controller>
         public IEnumerable<string> Get()
@@ -33,7 +39,7 @@ namespace NaicopServer.Controllers
 
         [Route("api/users/checkToken/{token}")]
         [HttpGet]
-        public IHttpActionResult checkToken([FromUri]string token)
+        public IHttpActionResult CheckToken([FromUri]string token)
         {
             User user = userService.GetFromToken(token);
             if (user == null)
@@ -79,7 +85,7 @@ namespace NaicopServer.Controllers
             {
                 user.Role = Roles.USER;
                 User newUser = userService.CreateUser(user);
-                return Ok(new JsonResponse<User>("Ok",user));
+                return Ok(new JsonResponse<User>("Ok", user));
             }catch(UserException ex)
             {
                 return Ok(new JsonResponse<string>("Error",ex.Message));

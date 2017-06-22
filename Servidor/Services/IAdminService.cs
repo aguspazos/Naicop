@@ -10,5 +10,6 @@ namespace Services
     public interface IAdminService
     {
         Admin Login(string email, string password);
+        Admin CreateAdmin(Admin admin);
     }
 }

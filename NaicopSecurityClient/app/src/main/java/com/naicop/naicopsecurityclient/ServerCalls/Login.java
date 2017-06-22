@@ -2,19 +2,29 @@ package com.naicop.naicopsecurityclient.ServerCalls;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.naicop.naicopsecurityclient.Config.Constants;
+import com.naicop.naicopsecurityclient.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.EOFException;
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,12 +37,12 @@ public abstract class Login {
     Context context;
     Map<String, String> params;
 
-    public Login(final Activity activity, String email, String password){
+    public Login(final Activity activity, String email, String password) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<>();
-        params.put("email",email);
-        params.put("password",password);
+        params.put("email", email);
+        params.put("password", password);
         String url = Constants.DOMAIN + "/api/securityClients/login";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -40,12 +50,12 @@ public abstract class Login {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            if(jsonResponse.has("Status") && jsonResponse.getString("Status").equals(Constants.SERVER_RESPONSE_STATUS_OK)){
+                            if (jsonResponse.has("Status") && jsonResponse.getString("Status").equals(Constants.SERVER_RESPONSE_STATUS_OK)) {
                                 JSONObject jsonEntity = new JSONObject(jsonResponse.getString("Entity"));
                                 String token = jsonEntity.getString("Token");
                                 success(token);
-                            }else{
-                                if(jsonResponse.has("Status") && jsonResponse.get("Status").equals(Constants.SERVER_RESPONSE_STATUS_ERROR)){
+                            } else {
+                                if (jsonResponse.has("Status") && jsonResponse.get("Status").equals(Constants.SERVER_RESPONSE_STATUS_ERROR)) {
                                     Toast.makeText(context, jsonResponse.getString("Entity"), Toast.LENGTH_SHORT).show();
                                 }
                             }

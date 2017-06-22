@@ -15,5 +15,23 @@ namespace Utils
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool IsEmptyString(string str)
+        {
+            return string.IsNullOrEmpty(str);
+        }
     }
 }
