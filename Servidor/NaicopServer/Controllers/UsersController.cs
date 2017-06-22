@@ -38,7 +38,11 @@ namespace NaicopServer.Controllers
             User user = userService.GetFromToken(token);
             if (user == null)
             {
-                return NotFound();
+                return Ok(new JsonResponse<string>()
+                {
+                    Status = "Error",
+                    Entity = ""
+                });
             }
             else
             {
@@ -79,7 +83,7 @@ namespace NaicopServer.Controllers
             {
                 user.Role = Roles.USER;
                 User newUser = userService.CreateUser(user);
-                return Ok(new JsonResponse<User>("Ok",user));
+                return Ok(new JsonResponse<User>("Ok",newUser));
             }catch(UserException ex)
             {
                 return Ok(new JsonResponse<string>("Error",ex.Message));
@@ -94,8 +98,39 @@ namespace NaicopServer.Controllers
             try
             {
                 User newUser = userService.FacebookLogin(user);
-                return Ok(new JsonResponse<User>("Ok",user));
+                return Ok(new JsonResponse<User>("Ok",newUser));
             }catch(UserException ex)
+            {
+                return Ok(new JsonResponse<string>("Error", ex.Message));
+            }
+        }
+        [Route("api/users/{token}")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri]string token,[FromBody]User user)
+        {
+            try
+            {
+                User newUser = userService.UpdateUser(token,user);
+                return Ok(new JsonResponse<User>("Ok", user));
+            }
+            catch (UserException ex)
+            {
+                return Ok(new JsonResponse<string>("Error", ex.Message));
+            }
+        }
+
+        [Route("api/users/{token}")]
+        [HttpGet]
+        public IHttpActionResult Get(string token)
+        {
+            try
+            {
+                User newUser = userService.GetFromToken(token);
+                if(newUser != null)
+                    return Ok(new JsonResponse<User>("Ok", newUser));
+                return Ok(new JsonResponse<string>("Error", "Usuario inexistente"));
+            }
+            catch (UserException ex)
             {
                 return Ok(new JsonResponse<string>("Error", ex.Message));
             }

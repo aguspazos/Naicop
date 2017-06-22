@@ -7,6 +7,8 @@ using System.IO;
 using System.Drawing;
 //using ZXing;
 using System.Collections.Generic;
+using ZXing;
+using Entitites.Exceptions;
 
 namespace Services.Implementations
 {
@@ -33,17 +35,36 @@ namespace Services.Implementations
             return false;
 
         }
-        /*public Ticket CreateTicket(Ticket ticket)
+        public Ticket CreateTicket(Ticket ticket)
         {
+            validateTicket(ticket);
+
+
+
             string code = HelperFunctions.RandomString(20);
+            ticket.Code = code;
             ticket.Status = TicketStatus.WAITING;
             ticket.QrImageUrl = createQrCode(code);
+            ticket.UpdatedOn = DateTime.Now;
+            ticket.CreatedOn = DateTime.Now;
+            ticket.Deleted = 0;
+            ticket.Used = 0;
             unitOfWork.TicketRepository.Insert(ticket);
             unitOfWork.Save();
             return ticket;
         }
 
-        /*private string createQrCode(string code)
+        private void validateTicket(Ticket ticket)
+        {
+            Event ticketEvent = unitOfWork.EventRepository.GetByID(ticket.EventID);
+            User user = unitOfWork.UserRepository.GetByID(ticket.UserID);
+
+            if (ticketEvent == null)
+                throw new TicketException("Error al crear el ticket");
+            if (user == null)
+                throw new TicketException("Error al crear el ticket");
+        }
+        private string createQrCode(string code)
         {
             BarcodeWriter writer = new BarcodeWriter
             { Format = BarcodeFormat.QR_CODE };
@@ -55,8 +76,12 @@ namespace Services.Implementations
             byte[] imageBytes = stream.ToArray();
             string base64String = Convert.ToBase64String(imageBytes);
             return ImageHelper.saveImage(base64String, "qr.jpg");
-        }*/
+        }
 
+        public List<Ticket> GetUpdated(DateTime updatedOn)
+        {
+            return unitOfWork.TicketRepository.Get(t => t.UpdatedOn >= updatedOn).ToList();
+        }
         public Ticket GetByCode(string code)
         {
             var ticketsEnumerable = unitOfWork.TicketRepository.Get(t => t.Code == code);
@@ -71,9 +96,14 @@ namespace Services.Implementations
 
         }
 
-        public Ticket CreateTicket(Ticket ticket)
+        public Ticket MakePayment(Ticket ticket)
         {
-            throw new NotImplementedException();
+            ticket = unitOfWork.TicketRepository.GetByID(ticket.ID);
+            validateTicket(ticket);
+            ticket.Status = TicketStatus.OK;
+            unitOfWork.TicketRepository.Update(ticket);
+            unitOfWork.Save();
+            return ticket;
         }
     }
 }

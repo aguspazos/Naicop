@@ -12,5 +12,6 @@ namespace Services
         User Login(string email, string password);
         User CreateUser(User user);
         User GetFromToken(string token);
+        User UpdateUser(string token, User user);
     }
 }

@@ -76,6 +76,24 @@ namespace Services.Implementations
             }
 
         }
+
+        public User UpdateUser(string token , User user)
+        {
+            User existingUser = GetFromToken(token);
+            if (existingUser == null)
+                throw new UserException("No existe el usuario a acutalizar");
+
+            existingUser.Email = user.Email;
+            existingUser.Phone = user.Phone;
+            existingUser.Name = user.Name;
+            existingUser.LastName = user.LastName;
+
+            validateUser(existingUser);
+            unitOfWork.UserRepository.Update(existingUser);
+            unitOfWork.Save();
+
+            return existingUser;
+        }
         private void validateUser(User user)
         {
             if (user.FacebookID == null || user.FacebookID.Equals("0") || user.FacebookID.Equals(""))
