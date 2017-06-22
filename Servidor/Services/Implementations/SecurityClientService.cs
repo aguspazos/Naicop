@@ -28,5 +28,18 @@ namespace Services.Implementations
             unitOfWork.Save();
             return securityClient;
         }
+
+        public SecurityClient GetByToken(string token)
+        {
+            var securityClientEnumerable = unitOfWork.SecurityClientRepository.Get(s => s.Token == token);
+            if(securityClientEnumerable.Count() > 0)
+            {
+                return securityClientEnumerable.First();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
