@@ -89,11 +89,8 @@ namespace NaicopServer.Controllers
             {
                 user.Role = Roles.USER;
                 User newUser = userService.CreateUser(user);
-<<<<<<< HEAD
-                return Ok(new JsonResponse<User>("Ok", user));
-=======
                 return Ok(new JsonResponse<User>("Ok",newUser));
->>>>>>> 706d9be333e2af7f37636f52a731162f39e1da2b
+
             }catch(UserException ex)
             {
                 return Ok(new JsonResponse<string>("Error",ex.Message));

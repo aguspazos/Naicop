@@ -5,7 +5,6 @@ using System.Linq;
 using Utils;
 using System.IO;
 using System.Drawing;
-//using ZXing;
 using System.Collections.Generic;
 using ZXing;
 using Entitites.Exceptions;
