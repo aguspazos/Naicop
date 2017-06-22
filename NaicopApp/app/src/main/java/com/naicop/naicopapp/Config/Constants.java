@@ -5,7 +5,7 @@ package com.naicop.naicopapp.Config;
  */
 public class Constants {
 
-    public static final String DOMAIN = "http://192.168.1.134:14/";
+    public static final String DOMAIN = "http://172.29.4.150:14/";
 
     public static final String BEGINNING_OF_TIME = "1900-01-01 00:00:00";
 

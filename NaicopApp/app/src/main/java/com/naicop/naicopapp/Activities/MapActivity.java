@@ -45,7 +45,7 @@ public class MapActivity extends NaicopActivity implements GoogleMap.OnMapClickL
         setContentView(R.layout.activity_map);
         findViewsById();
         setMapMenu();
-        //eventArrayList = handler.getEvents();
+        eventArrayList = handler.getEvents();
         if (Permissions.accessFineLocationPermissionEnabled(this)) {
             userLocation = handler.getUserLocation();
             setMap();
@@ -74,11 +74,11 @@ public class MapActivity extends NaicopActivity implements GoogleMap.OnMapClickL
     @Override
     public void onMapReady(GoogleMap map) {
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userLocation.getLatitude(), userLocation.getLongitude()), 14));
-        eventArrayList = new ArrayList<>();
-        eventArrayList.add(new Event("-34.883206", "-56.056027", "Punchi", 600, "La mejor fiesta en años", "27/08/2017"));
-        eventArrayList.add(new Event("-34.880583", "-56.049676", "Cachengue", 350, "Fiesta para re mamarse", "25/07/2017"));
-        eventArrayList.add(new Event("-34.877634", "-56.054504", "Fiesta Swinger", 2000, "Vas a coger y te van a coger", "12/07/2017"));
-        eventArrayList.add(new Event("-34.874615", "-56.061553", "Rombai", 400, "De fiesta!", "25/06/2017"));
+//        eventArrayList = new ArrayList<>();
+//        eventArrayList.add(new Event("-34.883206", "-56.056027", "Punchi", 600, "La mejor fiesta en años", "27/08/2017"));
+//        eventArrayList.add(new Event("-34.880583", "-56.049676", "Cachengue", 350, "Fiesta para re mamarse", "25/07/2017"));
+//        eventArrayList.add(new Event("-34.877634", "-56.054504", "Fiesta Swinger", 2000, "Vas a coger y te van a coger", "12/07/2017"));
+//        eventArrayList.add(new Event("-34.874615", "-56.061553", "Rombai", 400, "De fiesta!", "25/06/2017"));
         for (Event event : eventArrayList) {
             try {
                 LatLng eventLocation = new LatLng(Double.parseDouble(event.latitude), Double.parseDouble(event.longitude));

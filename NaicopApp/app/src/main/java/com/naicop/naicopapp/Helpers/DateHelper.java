@@ -25,4 +25,11 @@ public class DateHelper {
         }
 
     }
+
+    public static String getToday(){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        return sdfDate.format(now);
+
+    }
 }

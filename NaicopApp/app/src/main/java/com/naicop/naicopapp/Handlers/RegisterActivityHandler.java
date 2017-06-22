@@ -1,11 +1,10 @@
 package com.naicop.naicopapp.Handlers;
 
-import android.app.Activity;
-import android.support.v7.widget.ThemedSpinnerAdapter;
-
+import com.naicop.naicopapp.Config.Config;
 import com.naicop.naicopapp.Entitites.User;
-import com.naicop.naicopapp.Exceptions.InvalidRegisterDataException;
+import com.naicop.naicopapp.Exceptions.InvalidUserDataException;
 import com.naicop.naicopapp.Helpers.HelperFunctions;
+import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.ServerCalls.RegisterUser;
 import com.naicop.naicopapp.ServerCalls.UpdateDevice;
 
@@ -14,51 +13,58 @@ import com.naicop.naicopapp.ServerCalls.UpdateDevice;
  */
 public class RegisterActivityHandler {
 
-    protected Activity activity;
+    protected NaicopActivity activity;
 
-    public RegisterActivityHandler(Activity activity){
+    public RegisterActivityHandler(NaicopActivity activity){
         this.activity =activity;
     }
 
-    public void register(String email,String phone,String name,String lastName,String password,String repeatPassword) throws InvalidRegisterDataException{
+    public void register(String email,String phone,String name,String lastName,String password,String repeatPassword) throws InvalidUserDataException {
         validateEmail(email);
         validatePhone(phone);
         validateEmptyText(name);
         validateEmptyText(lastName);
         validatePassword(password,repeatPassword);
-        User user = new User(email,phone,name,lastName,password);
+        User user = new User(email,phone,name,lastName,password,"");
         new RegisterUser(activity, user) {
             @Override
             public void userRegistered(User user) {
+                Config.updateSavedToken(activity.context,user.token);
+                Config.setCurrentUserId(activity.context,user.id);
                 new UpdateDevice(activity,user.token);
+            }
+
+            @Override
+            public void registerError(String message) {
+                activity.alertPopUp.show(message);
             }
         };
     }
 
-    private void validateEmail(String email) throws InvalidRegisterDataException {
+    private void validateEmail(String email) throws InvalidUserDataException {
         if (!HelperFunctions.validEmail(email))
-            throw  new InvalidRegisterDataException("Formato de Email invalido");
+            throw  new InvalidUserDataException("Formato de Email invalido");
     }
 
-    private void validatePhone(String phone)throws InvalidRegisterDataException{
+    private void validatePhone(String phone)throws InvalidUserDataException {
         if(!HelperFunctions.validPhone(phone)){
-            throw  new InvalidRegisterDataException("Telefono invalido");
+            throw  new InvalidUserDataException("Telefono invalido");
 
         }
     }
 
 
-    private void validateEmptyText(String text) throws InvalidRegisterDataException {
+    private void validateEmptyText(String text) throws InvalidUserDataException {
         if(text.trim().equals("")){
-            throw new InvalidRegisterDataException("Los datos no pueden estar vacios");
+            throw new InvalidUserDataException("Los datos no pueden estar vacios");
         }
     }
 
-    private void validatePassword(String password,String repeatPassword) throws InvalidRegisterDataException {
+    private void validatePassword(String password,String repeatPassword) throws InvalidUserDataException {
         if(password.length() < 6)
-            throw  new InvalidRegisterDataException("La contrasena no debe tener mas de 6 caracteres");
+            throw  new InvalidUserDataException("La contrasena no debe tener mas de 6 caracteres");
         if(!password.equals(repeatPassword))
-            throw  new InvalidRegisterDataException("Las contrasenas no coinciden");
+            throw  new InvalidUserDataException("Las contrasenas no coinciden");
 
     }
 }

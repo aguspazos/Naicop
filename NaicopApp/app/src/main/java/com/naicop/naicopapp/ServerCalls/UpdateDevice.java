@@ -19,6 +19,7 @@ import com.naicop.naicopapp.Entitites.User;
 import com.naicop.naicopapp.Persistance.CategorySQL;
 import com.naicop.naicopapp.Persistance.DatabaseHelper;
 import com.naicop.naicopapp.Persistance.EventSQL;
+import com.naicop.naicopapp.Persistance.TicketSQL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,6 +78,18 @@ public class UpdateDevice {
                                     db.endTransaction();
                                 }
                             }
+                            if(jsonResponse.has("Tickets")){
+                                JSONArray ticketsArray = jsonResponse.getJSONArray("Tickets");
+                                SQLiteDatabase db = DatabaseHelper.getInstance().getWritableDatabase();
+                                db.beginTransaction();
+                                try {
+                                    String lastUpdated = TicketSQL.updateAllIncoming(db,ticketsArray);
+                                    changeLastUpdated(lastUpdated);
+                                    db.setTransactionSuccessful();
+                                }finally {
+                                    db.endTransaction();
+                                }
+                            }
                         } catch (JSONException e) {
                             if (activity != null) {
                                 e.printStackTrace();
@@ -84,6 +97,7 @@ public class UpdateDevice {
                         }
                         Config.setLastUpdated(context,prefsLastUpdated);
                         Intent intent = new Intent(activity,EventsActivity.class);
+                        activity.finish();
                         activity.startActivity(intent);
                     }
                 },

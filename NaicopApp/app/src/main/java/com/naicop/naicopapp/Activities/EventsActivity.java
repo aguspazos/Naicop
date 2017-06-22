@@ -1,5 +1,6 @@
 package com.naicop.naicopapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,9 @@ public class EventsActivity extends NaicopActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handler = new EventsActivityHandler(this);
+        createHandler();
         setContentView(R.layout.activity_events);
+        super.comeToLife();
         eventsList = (ListView)findViewById(R.id.eventsList);
         menuBar = new MenuWithSearchBar(this,context) {
             @Override
@@ -59,9 +61,11 @@ public class EventsActivity extends NaicopActivity {
         });
         orderBehaviour();
         showEvents();
-
     }
 
+    protected void createHandler(){
+        handler = new EventsActivityHandler(this);
+    }
     private void loadCategories(){
         filterCategoryView = new FilterCategoryView(EventsActivity.this, context) {
             @Override
@@ -147,7 +151,11 @@ public class EventsActivity extends NaicopActivity {
         eventsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(context,"asfsaf",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(EventsActivity.this,EventActivity.class);
+                Event event = (Event)adapterView.getAdapter().getItem(i);
+                intent.putExtra("event_id",event.id);
+                startActivity(intent);
+
             }
         });
     }

@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationManager;
 
 import com.naicop.naicopapp.Config.Permissions;
+import com.naicop.naicopapp.Entitites.Category;
 import com.naicop.naicopapp.Entitites.Event;
 import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.Persistance.EventSQL;
@@ -38,7 +39,7 @@ public class MapActivityHandler {
 
     public ArrayList<Event> getEvents(){
         if(events.size()==0)
-            events =  EventSQL.getAll();
+            events =  EventSQL.getAllActive("", Category.ALL_ID);
         return events;
     }
 
