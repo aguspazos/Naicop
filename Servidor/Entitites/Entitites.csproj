@@ -55,8 +55,8 @@
     <Compile Include="ClientUser.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Exceptions\SecurityClientException.cs" />
+    <Compile Include="Exceptions\TicketException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
-    <Compile Include="Payments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QrCode.cs" />
     <Compile Include="Roles.cs" />

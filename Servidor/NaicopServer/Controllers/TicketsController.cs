@@ -1,8 +1,8 @@
 ﻿using Entitites;
-using Newtonsoft.Json.Linq;
+using Entitites.Exceptions;
+using NaicopServer.Dtos;
 using Services;
 using Services.Implementations;
-using NaicopServer.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +14,10 @@ namespace NaicopServer.Controllers
     public class TicketsController : ApiController
     {
         private ITicketService ticketService;
-        private ISecurityClientService securityClientService;
 
         public TicketsController()
         {
             this.ticketService = new TicketService();
-            this.securityClientService = new SecurityClientService();
         }
 
         public TicketsController(ITicketService ticketService)
@@ -33,51 +31,37 @@ namespace NaicopServer.Controllers
             return "value";
         }
 
+        [Route("api/tickets/makePayment")]
+        [HttpPost]
+        public IHttpActionResult makePayment([FromBody]Ticket ticket)
+        {
+            try
+            {
+                Ticket newTicket = ticketService.MakePayment(ticket);
+                return Ok(new JsonResponse<Ticket>("Ok", newTicket));
+
+            }
+            catch (TicketException ex)
+            {
+                return Ok(new JsonResponse<string>("Error", ex.Message));
+            }
+
+        }
         // POST api/<controller>
         [Route("api/tickets")]
         [HttpPost]
         public IHttpActionResult Post([FromBody]Ticket ticket)
         {
-            Ticket newTicket = ticketService.CreateTicket(ticket);
-            return Ok(newTicket);
-
-        }
-
-        // POST api/<controller>
-        [Route("api/tickets/validateQrCode")]
-        [HttpPost]
-        public IHttpActionResult ValidateQrCode([FromBody] string ticketCode)
-        {
-            Ticket ticket = ticketService.GetByCode(ticketCode);
-            if (ticket == null)
+            try
             {
-                return Ok(new JsonResponse<string>()
-                {
-                    Status = "Error",
-                    Entity = "Acceso denegado"
-                });
-            }
-            else
-            {
-                if (ticket.Status == TicketStatus.OK)
-                {
-                    return Ok(new JsonResponse<string>()
-                    {
-                        Status = "Ok",
-                        Entity = "Acceso garantizado"
-                    });
+                Ticket newTicket = ticketService.CreateTicket(ticket);
+                return Ok(new JsonResponse<Ticket>("Ok",newTicket));
 
-                }
-                else
-                {
-                    return Ok(new JsonResponse<string>()
-                    {
-                        Status = "Error",
-                        Entity = "Acceso denegado"
-                    });
-                }
+            }catch(TicketException ex)
+            {
+                return Ok(new JsonResponse<string>("Error", ex.Message));
             }
-            
+
         }
 
         // PUT api/<controller>/id

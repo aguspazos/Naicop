@@ -12,6 +12,8 @@ namespace Services
         Ticket CreateTicket(Ticket ticket);
 
         Ticket GetByCode(string code);
+        Ticket MakePayment(Ticket ticket);
+        List<Ticket> GetUpdated(DateTime updatedOn);
         
     }
 }

@@ -16,11 +16,13 @@ namespace NaicopServer.Controllers
     {
         private IEventService eventService;
         private ICategoryService categoryService;
+        private ITicketService ticketService;
 
         public DevicesController() { 
         
             eventService = new EventService();
             categoryService = new CategoryService();
+            ticketService = new TicketService();
         }
         // GET api/<controller>
         [Route("api/devices/getUpdated")]
@@ -33,6 +35,7 @@ namespace NaicopServer.Controllers
             UpdateDeviceDto data = new UpdateDeviceDto();
             data.Events = eventService.GetAll();
             data.Categories = categoryService.GetAll();
+            data.Tickets = ticketService.GetUpdated(lastUpdated);
             return Ok(data);
         }
 
