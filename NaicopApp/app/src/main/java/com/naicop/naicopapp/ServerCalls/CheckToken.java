@@ -76,7 +76,6 @@ public abstract class CheckToken {
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
                                 }
-                                Log.v("Error - DATA", dataStr);
                             }
                         }
                         Intent intent = new Intent(activity, EventsActivity.class);

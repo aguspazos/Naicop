@@ -1,5 +1,6 @@
 package com.naicop.naicopapp.Activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
@@ -8,7 +9,7 @@ import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.Persistance.DatabaseHelper;
 import com.naicop.naicopapp.R;
 
-public class LoadingActivity extends NaicopActivity {
+public class LoadingActivity extends Activity {
 
     protected LoadingActivityHandler handler;
 

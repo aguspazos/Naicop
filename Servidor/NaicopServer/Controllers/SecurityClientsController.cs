@@ -1,4 +1,5 @@
 ﻿using Entitites;
+using NaicopServer.Dtos;
 using Services;
 using Services.Implementations;
 using System;
@@ -24,6 +25,23 @@ namespace NaicopServer.Controllers
             return "value";
         }
 
+        [Route("api/securityClients/login")]
+        [HttpPost]
+        public IHttpActionResult login([FromBody]SecurityClient securityClient)
+        {
+            try
+            {
+                SecurityClient newSecurityClient = securityClientService.Login(securityClient.Email,securityClient.Password);
+                if (newSecurityClient != null)
+                    return Ok(new JsonResponse<SecurityClient>("Ok", newSecurityClient));
+
+                return Ok(new JsonResponse<string>("Error","No existe el usuario"));
+            }catch(SecurityClientException ex)
+            {
+                return Ok(new JsonResponse<string>("Error", ex.Message));
+            }
+
+        }
         // POST api/<controller>
         [Route("api/securityClients")]
         [HttpPost]
