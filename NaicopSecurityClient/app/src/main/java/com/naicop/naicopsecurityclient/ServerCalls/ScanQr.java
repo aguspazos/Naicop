@@ -24,19 +24,20 @@ import java.util.Map;
  * Created by Martin on 21/06/2017.
  */
 
-public abstract class CheckToken {
+public class ScanQr {
     Activity activity;
     Context context;
     Map<String, String> params;
 
 
-    public CheckToken(final Activity activity,String token) {
+    public ScanQr(final Activity activity,String token, String code) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<>();
         params.put("token",token);
-        String url = Constants.DOMAIN + "/api/securityClients/checkToken/"+token;
-        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+        params.put("token",code);
+        String url = Constants.DOMAIN + "/api/tickets/validateQrCode";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -45,9 +46,9 @@ public abstract class CheckToken {
                             if(jsonResponse.has("status")){
                                 String status = jsonResponse.getString("status");
                                 if(status.equals("Ok")){
-                                    userLogged(jsonResponse);
+                                    Toast.makeText(activity, "Acceso autorizado", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    userNotLogged();
+                                    Toast.makeText(activity, "Acceso denegado", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         } catch (JSONException e) {
@@ -75,8 +76,8 @@ public abstract class CheckToken {
                                 Log.v("Error - DATA", dataStr);
                             }
                         }
-                        Intent intent = LoginActivity.getStartIntent(activity);
-                        activity.startActivity(intent);
+
+
                     }
                 }
         );
@@ -84,6 +85,4 @@ public abstract class CheckToken {
         MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
 
-    public abstract void userLogged(JSONObject response);
-    public abstract void userNotLogged();
 }

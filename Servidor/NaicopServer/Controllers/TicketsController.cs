@@ -39,28 +39,40 @@ namespace NaicopServer.Controllers
         }
 
         // POST api/<controller>
-        [Route("api/tickets")]
+        [Route("api/tickets/validateQrCode")]
         [HttpPost]
-        public IHttpActionResult CheckTicketFromQrCode(JObject jsonObject)
+        public IHttpActionResult ValidateQrCode([FromBody] string ticketCode)
         {
-            JsonResponse<string> response = new JsonResponse<string>();
-            var securityClientToken = jsonObject["token"].Value<string>();
-            var ticketCode = jsonObject["code"].Value<string>();
-            var securityClient = securityClientService.GetByToken(securityClientToken);
-            if(securityClient != null)
+            Ticket ticket = ticketService.GetByCode(ticketCode);
+            if (ticket == null)
             {
-                Ticket ticket = ticketService.GetByCode(ticketCode);
-                //if(ticket)
-                return Ok(ticket);
+                return Ok(new JsonResponse<string>()
+                {
+                    Status = "Error",
+                    Entity = "Acceso denegado"
+                });
             }
             else
             {
-                response.status = "Error";
-                response.Entity = "Permiso de escaneo denegado";
-                return Ok(response);
+                if (ticket.Status == TicketStatus.OK)
+                {
+                    return Ok(new JsonResponse<string>()
+                    {
+                        Status = "Ok",
+                        Entity = "Acceso garantizado"
+                    });
+
+                }
+                else
+                {
+                    return Ok(new JsonResponse<string>()
+                    {
+                        Status = "Error",
+                        Entity = "Acceso denegado"
+                    });
+                }
             }
             
-
         }
 
         // PUT api/<controller>/id

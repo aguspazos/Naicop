@@ -42,6 +42,30 @@ namespace NaicopServer.Controllers
             }
 
         }
+
+        [Route("api/securityClients/checkToken/{token}")]
+        [HttpGet]
+        public IHttpActionResult checkToken([FromUri]string token)
+        {
+            SecurityClient securityClient = securityClientService.GetByToken(token);
+            if (securityClient == null)
+            {
+                return Ok(new JsonResponse<string>()
+                {
+                    Status = "Error",
+                    Entity = "No se encontró usuario"
+                });
+            }
+            else
+            {
+                return Ok(new JsonResponse<string>()
+                {
+                    Status = "Ok",
+                    Entity = token
+                });
+            }
+        }
+
         // POST api/<controller>
         [Route("api/securityClients")]
         [HttpPost]

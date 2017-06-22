@@ -29,9 +29,7 @@ public class LoadingActivityHandler {
             Intent intent = LoginActivity.getStartIntent(activity);
             activity.startActivity(intent);
         }else {
-            Intent intent = MainActivity.getStartIntent(activity);
-            activity.startActivity(intent);
-            /*new CheckToken(activity, token) {
+            new CheckToken(activity, token) {
                 @Override
                 public void userLogged(JSONObject response) {
                     Intent intent = MainActivity.getStartIntent(activity);
@@ -44,7 +42,7 @@ public class LoadingActivityHandler {
                     Intent intent = LoginActivity.getStartIntent(activity);
                     activity.startActivity(intent);
                 }
-            };*/
+            };
         }
     }
 }

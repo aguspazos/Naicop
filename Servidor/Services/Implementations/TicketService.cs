@@ -1,10 +1,11 @@
 ﻿using System;
 using Entitites;
 using Repository;
+using System.Linq;
 using Utils;
 using System.IO;
 using System.Drawing;
-using ZXing;
+//using ZXing;
 using System.Collections.Generic;
 
 namespace Services.Implementations
@@ -32,7 +33,7 @@ namespace Services.Implementations
             return false;
 
         }
-        public Ticket CreateTicket(Ticket ticket)
+        /*public Ticket CreateTicket(Ticket ticket)
         {
             string code = HelperFunctions.RandomString(20);
             ticket.Status = TicketStatus.WAITING;
@@ -42,7 +43,7 @@ namespace Services.Implementations
             return ticket;
         }
 
-        private string createQrCode(string code)
+        /*private string createQrCode(string code)
         {
             BarcodeWriter writer = new BarcodeWriter
             { Format = BarcodeFormat.QR_CODE };
@@ -54,6 +55,25 @@ namespace Services.Implementations
             byte[] imageBytes = stream.ToArray();
             string base64String = Convert.ToBase64String(imageBytes);
             return ImageHelper.saveImage(base64String, "qr.jpg");
+        }*/
+
+        public Ticket GetByCode(string code)
+        {
+            var ticketsEnumerable = unitOfWork.TicketRepository.Get(t => t.Code == code);
+            if (ticketsEnumerable.Count() > 0)
+            {
+                return ticketsEnumerable.First();
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public Ticket CreateTicket(Ticket ticket)
+        {
+            throw new NotImplementedException();
         }
     }
 }
