@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.EventsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/menu_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.85"
+            android:orientation="vertical"
+            >
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:background="#F5F5F5" >
+
+                            <ImageView
+                                android:id="@+id/eventImage"
+                                android:layout_centerInParent="true"
+                                android:scaleType="centerCrop"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/eventTitle"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/eventDescription"
+                        android:layout_below="@+id/eventTitle"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+
+                    <TextView
+                        android:id="@+id/buyTicketButton"
+                        android:background="@drawable/round_corner_button"
+                        android:visibility="gone"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Comprar Ticket"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ticketDataContainer"
+                        android:visibility="gone"
+                        >
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/ticketStatusImage"
+                            android:scaleType="fitCenter"
+                            android:layout_marginLeft="20dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_toRightOf="@+id/ticketStatusImage"
+                            android:layout_alignBottom="@+id/ticketStatusImage"
+                            android:gravity="center"
+                            android:id="@+id/ticketStatusText"
+                            android:text="Volver a realizar el pago"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/ticketDetailsButton"
+                            android:background="@drawable/round_corner_button"
+                            android:layout_below="@+id/ticketStatusImage"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:text="Ver Ticket"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ticketDetailsContainer"
+                        android:layout_marginTop="25dp"
+                        android:visibility="gone"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="UASGSHAGSAJ"
+                            android:id="@+id/ticketCodeText"
+                            android:textSize="20sp"
+                            />
+                        <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/ticketCodeText"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/qrCodeImage"
+                            />
+                    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/shareButton"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="25dp"
+                        android:src="@drawable/share"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginBottom="20dp" />
+
+                </LinearLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:clickable="true"
+                android:alpha="0.3"
+                android:visibility="gone"
+                android:id="@+id/opacity"
+                ></RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <include
+        layout="@layout/menu_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        />
+    <include
+        layout="@layout/alert"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/alertContainer"
+        />
+    <include
+        layout="@layout/make_payment_pop_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/makePaymentContainer"
+        />
+    <include
+        layout="@layout/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loaderContainer"/>
+</RelativeLayout>

@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import com.naicop.naicopapp.Activities.EventsActivity;
 import com.naicop.naicopapp.Entitites.Category;
 import com.naicop.naicopapp.Entitites.Event;
+import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.Persistance.CategorySQL;
 import com.naicop.naicopapp.Persistance.EventSQL;
 import com.naicop.naicopapp.Widgets.FilterCategoryView;
@@ -17,8 +18,10 @@ import java.util.List;
  * Created by pazos on 18-Jun-17.
  */
 public class EventsActivityHandler {
-    protected Activity activity;
+    protected NaicopActivity activity;
     protected FilterCategoryView filterCategoryView;
+
+    protected String orderBy;
 
     private List<Category> categories;
     protected ArrayList<Event> filteredEvents;
@@ -26,17 +29,22 @@ public class EventsActivityHandler {
     protected Category categorySelected;
 
 
-    public EventsActivityHandler(Activity activity){
+    public EventsActivityHandler(NaicopActivity activity){
         this.activity = activity;
         categories = new ArrayList<>();
-        allEvents = EventSQL.getAllActive();
+        orderBy ="";
+        setAllEvents();
         filteredEvents = new ArrayList<>(allEvents);
     }
 
 
+
+    protected void setAllEvents(){
+        allEvents = EventSQL.getAllActive("",Category.ALL_ID);
+    }
     public void search(String text){
         if(text.trim().equals("")){
-            allEvents = EventSQL.getAllActive();
+            setAllEvents();
             filteredEvents = allEvents;
         }else{
             filteredEvents.clear();
@@ -65,32 +73,36 @@ public class EventsActivityHandler {
     }
 
     public void filterByCategory(Category category){
-        if(category.id == Category.ALL_ID)
+        if(category == null || category.id == Category.ALL_ID)
             filteredEvents = allEvents;
         else
-            filteredEvents = EventSQL.getAllActiveFromCategory(category.id);
+            filteredEvents = getFilteredCategories(category);
         categorySelected = category;
     }
     public void resetOrder(){
         filteredEvents = allEvents;
     }
 
+    protected ArrayList<Event> getFilteredCategories(Category category){
+        return EventSQL.getAllActive(orderBy,category.id);
+    }
+
+    protected ArrayList<Event>getOrderedEvents(int categoryId){
+        return EventSQL.getAllActive(orderBy,categoryId);
+    }
+
     public void orderByTitle(){
-        getOrdered(EventSQL.title.second + " ASC");
+        orderBy = "ORDER BY "+EventSQL.title.second+" ASC";
+        filteredEvents = getOrderedEvents(categorySelected == null?Category.ALL_ID:categorySelected.id);
     }
 
     public void orderByDate(){
-        getOrdered(EventSQL.startDate.second +" ASC");
+        orderBy = "ORDER BY "+EventSQL.startDate.second+" ASC";
+        filteredEvents = getOrderedEvents(categorySelected == null?Category.ALL_ID:categorySelected.id);
     }
 
     public void orderByPrice(){
-        getOrdered(EventSQL.price.second + " DESC");
-    }
-
-    private void getOrdered(String orderBy){
-        if(categorySelected.id == Category.ALL_ID)
-            filteredEvents = EventSQL.getAllOrdered(orderBy);
-        else
-            filteredEvents = EventSQL.getAllOrdered(orderBy,categorySelected.id);
+        orderBy = "ORDER BY "+EventSQL.price.second+" DESC";
+        filteredEvents = getOrderedEvents(categorySelected == null?Category.ALL_ID:categorySelected.id);
     }
 }

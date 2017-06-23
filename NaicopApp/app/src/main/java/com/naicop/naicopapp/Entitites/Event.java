@@ -51,6 +51,10 @@ public class Event {
     }
 
     public Event (JSONObject jsonEvent) throws JSONException {
+        String startDate = jsonEvent.getString("StartDate");
+        if(startDate.contains("T"))
+            startDate =startDate.replace("T"," ");
+
         this.id = jsonEvent.getInt("ID");
         this.title = jsonEvent.getString("Title");
         this.description = jsonEvent.getString("Description");
@@ -60,7 +64,7 @@ public class Event {
         this.maxCapacity = jsonEvent.getInt("MaxCapacity");
         this.categoryId = jsonEvent.getInt("CategoryID");
         this.clientUserId = jsonEvent.getInt("ClientUserID");
-        this.startDate = jsonEvent.getString("StartDate");
+        this.startDate = startDate;
         this.endDate = jsonEvent.getString("EndDate");
         this.price = jsonEvent.getDouble("Price");
         this.deleted = jsonEvent.getInt("Deleted") == 1;

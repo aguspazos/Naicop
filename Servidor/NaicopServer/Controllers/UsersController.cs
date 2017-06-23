@@ -30,12 +30,6 @@ namespace NaicopServer.Controllers
             this.userService = userService;
             this.authenticationService = authenticationService; 
         }
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
 
         [Route("api/users/checkToken/{token}")]
         [HttpGet]
@@ -74,11 +68,7 @@ namespace NaicopServer.Controllers
                 return Ok(user);
             }
         }
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+
 
         // POST api/<controller>
         [Route("api/users")]
@@ -111,14 +101,14 @@ namespace NaicopServer.Controllers
                 return Ok(new JsonResponse<string>("Error", ex.Message));
             }
         }
-        [Route("api/users/{token}")]
-        [HttpPut]
-        public IHttpActionResult Put([FromUri]string token,[FromBody]User user)
+        [Route("api/users/save")]
+        [HttpPost]
+        public IHttpActionResult Save([FromBody]User user)
         {
             try
             {
-                User newUser = userService.UpdateUser(token,user);
-                return Ok(new JsonResponse<User>("Ok", user));
+                User newUser = userService.UpdateUser(user);
+                return Ok(new JsonResponse<User>("Ok", newUser));
             }
             catch (UserException ex)
             {

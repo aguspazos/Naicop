@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/makePaymentContainer"
+    android:visibility="gone"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:alpha="0.3"
+        ></RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@android:color/holo_blue_dark"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:id="@+id/cardNumberContainer"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/round_corner"
+
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:src="@drawable/mail_icon"
+                    android:scaleType="fitCenter"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:hint="Numero de Tarjeta"
+                android:height="50dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_border"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:id="@+id/cardNumberText"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:id="@+id/cardCvvTextContainer"
+            android:layout_below="@+id/cardNumberContainer"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/round_corner"
+
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:src="@drawable/mail_icon"
+                    android:scaleType="fitCenter"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:hint="Cvv"
+                android:height="50dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_border"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:id="@+id/cardCvvText"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Aceptar"
+            android:textColor="@android:color/white"
+            android:background="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/cardCvvTextContainer"
+            android:layout_marginTop="10dp"
+            android:id="@+id/makePaymentButton"
+            android:layout_marginBottom="30dp"
+
+            />
+    </RelativeLayout>
+</RelativeLayout>

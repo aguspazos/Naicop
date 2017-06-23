@@ -12,11 +12,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookAuthorizationException;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.naicop.naicopapp.Exceptions.InvalidLoginDataException;
 import com.naicop.naicopapp.Handlers.LoginActivityHandler;
 import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -24,6 +35,7 @@ import java.util.List;
 
 public class LoginActivity extends NaicopActivity {
 
+    private CallbackManager callbackManager;
     protected LoginActivityHandler handler;
     protected TextView loginButton;
     protected TextView facebookLoginButton;
@@ -34,9 +46,18 @@ public class LoginActivity extends NaicopActivity {
         super.onCreate(savedInstanceState);
         handler = new LoginActivityHandler(this);
         setContentView(R.layout.activity_login);
+        super.comeToLife();
         findViewsById();
+        setFacebookManager();
         setButtonsColors();
         setBehaviour();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void findViewsById(){
@@ -52,7 +73,6 @@ public class LoginActivity extends NaicopActivity {
         facebookLoginShape.setColor(Color.parseColor("#51a3d1"));
         GradientDrawable signUpShape = (GradientDrawable)signUpButton.getBackground();
         signUpShape.setColor(Color.parseColor("#54b16d"));
-
     }
 
     private void setBehaviour(){
@@ -84,8 +104,7 @@ public class LoginActivity extends NaicopActivity {
         try {
             handler.LoginAction(emailText.getText().toString(),passwordText.getText().toString());
         } catch (InvalidLoginDataException e) {
-            e.printStackTrace();
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            alertPopUp.show(e.getMessage());
         }
     }
 
@@ -94,53 +113,52 @@ public class LoginActivity extends NaicopActivity {
         startActivity(intent);
     }
 
-    private void facebookLoginAction(){
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        callbackManager = CallbackManager.Factory.create();
-//        LoginManager.getInstance().registerCallback(callbackManager,
-//                new FacebookCallback<LoginResult>() {
-//                    @Override
-//                    public void onSuccess(LoginResult loginResult) {
-//                        Log.d("Success", "Login");
-//                        AccessToken accessToken = loginResult.getAccessToken();
-//                        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-//                            @Override
-//                            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
-//                                Log.v("facebookCallBack", jsonObject.toString());
-//                                facebookLogin(jsonObject);
-//                            }
-//                        });
-//                        Bundle parameters = new Bundle();
-//                        parameters.putString("fields", "id,first_name,last_name,name,gender,email");
-//                        request.setParameters(parameters);
-//                        request.executeAsync();
-//                    }
-//
-//                    @Override
-//                    public void onCancel() {
-//                        PopUpHelper.showAlert(thisActivity,context,"Login cancelado");
-//                    }
-//
-//                    @Override
-//                    public void onError(FacebookException exception) {
-//                        if (exception instanceof FacebookAuthorizationException) {
-//                            if (AccessToken.getCurrentAccessToken() != null) {
-//                                LoginManager.getInstance().logOut();
-//                            }
-//                            PopUpHelper.showAlert(thisActivity,context,"Intente nuevamente");
-//                        }else {
-//                            PopUpHelper.showAlert(thisActivity, context, exception.getMessage());
-//                        }
-//                    }
-//                });
-//        RelativeLayout facebookLogin = (RelativeLayout) findViewById(R.id.facebookLogin);
-//        facebookLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                List<String> permissions = Arrays.asList("public_profile", "user_friends", "email");
-//                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, permissions);
-//            }
-//        });
+    private void facebookLoginAction() {
+        List<String> permissions = Arrays.asList("public_profile", "user_friends", "email");
+        LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, permissions);
     }
+    private void setFacebookManager(){
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d("Success", "Login");
+                        AccessToken accessToken = loginResult.getAccessToken();
+                        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                                Log.v("facebookCallBack", jsonObject.toString());
+                                try {
+                                    handler.facebookLoginAction(jsonObject);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(context,"No se pudo registrar con facebook",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,first_name,last_name,name,gender,email");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                    }
+
+                    @Override
+                    public void onCancel() {
+//                        PopUpHelper.showAlert(thisActivity,context,"Login cancelado");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        if (exception instanceof FacebookAuthorizationException) {
+                            if (AccessToken.getCurrentAccessToken() != null) {
+                                LoginManager.getInstance().logOut();
+                            }
+                        }else {
+                        }
+                    }
+                });
+        }
 
 }

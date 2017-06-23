@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.naicop.naicopapp.Exceptions.InvalidRegisterDataException;
+import com.naicop.naicopapp.Exceptions.InvalidUserDataException;
 import com.naicop.naicopapp.Handlers.RegisterActivityHandler;
 import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.R;
@@ -21,21 +20,21 @@ public class RegisterActivity extends NaicopActivity {
         registerActivityHandler = new RegisterActivityHandler(this);
 
         setContentView(R.layout.actity_register);
+        super.comeToLife();
         register = (TextView)findViewById(R.id.registerButton);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     registerAction();
-                }catch (InvalidRegisterDataException ex){
-                    ex.printStackTrace();
-                    Toast.makeText(context,ex.getMessage(),Toast.LENGTH_LONG).show();
+                }catch (InvalidUserDataException ex){
+                    alertPopUp.show(ex.getMessage());
                 }
             }
         });
     }
 
-    private void registerAction() throws InvalidRegisterDataException {
+    private void registerAction() throws InvalidUserDataException {
         EditText emailText = (EditText)findViewById(R.id.emailText);
         EditText phoneText = (EditText)findViewById(R.id.phoneText);
         EditText nameText = (EditText)findViewById(R.id.nameText);

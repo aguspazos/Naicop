@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.util.Pair;
 
+import com.naicop.naicopapp.Config.Config;
 import com.naicop.naicopapp.Config.Constants;
 import com.naicop.naicopapp.Entitites.Category;
 import com.naicop.naicopapp.Entitites.Event;
+import com.naicop.naicopapp.Helpers.DateHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -140,31 +142,43 @@ public class EventSQL {
 
     }
 
-    public static ArrayList<Event>getAllOrdered(String orderBy,int category){
-        String whereClause = deleted.second+"=0 AND "+EventSQL.categoryId.second+" = ?";
-        String[] whereArgs = {category + ""};
-        SQLiteDatabase db = DatabaseHelper.getInstance().getReadableDatabase();
-        Cursor modelCursor = db.query(TABLE_NAME, new String[]{"*"}, whereClause, whereArgs, "", "", orderBy);
-        return toList(modelCursor);
-    }
-    public static ArrayList<Event>getAllOrdered(String orderBy){
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+deleted.second + "=0 order by "+orderBy;
+    public static ArrayList<Event> getAllActive(String orderBy, int categoryId) {
+
+        String today = DateHelper.getToday();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+deleted.second + "=0"+" AND "+startDate.second+" > '"+today+"'";
+        if(categoryId != Category.ALL_ID)
+            query += " AND "+EventSQL.categoryId.second+" = "+categoryId;
+        query+= " "+orderBy;
         Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query, null);
         return toList(modelCursor);
     }
 
-    public static ArrayList<Event> getAllActive() {
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+deleted.second + "=0";
-        Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query, null);
+    public static ArrayList<Event>getHistoricalFromUser(int userId,String orderBy,int categoryId){
+        String today = DateHelper.getToday();
+        String query = "SELECT e.* FROM "+TABLE_NAME+" e, "+TicketSQL.TABLE_NAME+" t where t.eventId = e._id AND t.userId = "+userId
+                +" AND e."+EventSQL.endDate.second+" < '"+today+ "' AND t.deleted = 0";
+        if(categoryId != Category.ALL_ID)
+            query += " AND "+EventSQL.categoryId.second+" = "+categoryId;
+        query+= " "+orderBy;
+        Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query,null);
         return toList(modelCursor);
     }
 
-    public static ArrayList<Event> getAllActiveFromCategory(int categoryId){
-        String whereClause = deleted.second+"=0 AND "+EventSQL.categoryId.second+" = ?";
-        String[] whereArgs = {categoryId + ""};
-        String orderBy = EventSQL.startDate.second+" DESC";
-        SQLiteDatabase db = DatabaseHelper.getInstance().getReadableDatabase();
-        Cursor modelCursor = db.query(TABLE_NAME, new String[]{"*"}, whereClause, whereArgs, "", "", orderBy);
+    public static ArrayList<Event> getAllActiveFromUser(int userId,String orderBy,int categoryId){
+        String today = DateHelper.getToday();
+        String query = "SELECT e.* FROM "+TABLE_NAME+" e, "+TicketSQL.TABLE_NAME+" t where t.eventId = e._id AND t.userId = "+userId
+                +" AND e."+EventSQL.endDate.second+" > '"+today+"' AND t.deleted = 0";
+        if(categoryId != Category.ALL_ID)
+            query += " AND "+EventSQL.categoryId.second+" = "+categoryId;
+        query+= " "+orderBy;
+        Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query,null);
+        return toList(modelCursor);
+    }
+    public static ArrayList<Event> getAllActiveFromCategory(int categoryId,String orderBy){
+        String today = DateHelper.getToday();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+deleted.second + "=0"+" AND "+startDate.second+" > '"+today+"'"+
+                " AND "+EventSQL.categoryId.second+" = "+categoryId+" "+orderBy;
+        Cursor modelCursor = DatabaseHelper.getInstance().getReadableDatabase().rawQuery(query, null);
         return toList(modelCursor);
     }
     private static ArrayList<Event> toList(Cursor modelCursor){

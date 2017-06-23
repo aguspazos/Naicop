@@ -79,9 +79,9 @@ namespace Services.Implementations
 
         }
 
-        public User UpdateUser(string token , User user)
+        public User UpdateUser(User user)
         {
-            User existingUser = GetFromToken(token);
+            User existingUser = GetFromToken(user.Token);
             if (existingUser == null)
                 throw new UserException("No existe el usuario a acutalizar");
 
@@ -90,7 +90,7 @@ namespace Services.Implementations
             existingUser.Name = user.Name;
             existingUser.LastName = user.LastName;
 
-            validateUser(existingUser);
+            //validateUser(existingUser);
             unitOfWork.UserRepository.Update(existingUser);
             unitOfWork.Save();
 

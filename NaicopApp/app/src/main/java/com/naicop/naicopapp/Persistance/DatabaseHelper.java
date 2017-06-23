@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(CategorySQL.CREATION_STRING);
         db.execSQL(EventSQL.CREATION_STRING);
+        db.execSQL(TicketSQL.CREATION_STRING);
     }
 
     @Override
@@ -61,6 +62,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void dropDatabase(SQLiteDatabase db){
+        db.execSQL("DROP TABLE IF EXISTS "+TicketSQL.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+EventSQL.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+CategorySQL.TABLE_NAME);
     }
 
 

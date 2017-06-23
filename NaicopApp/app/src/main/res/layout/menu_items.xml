@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/itemsLayoutContainer"
+    >
+
+    <RelativeLayout
+        android:layout_weight="0.15"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <RelativeLayout
+        android:layout_weight="0.85"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:clickable="true"
+            android:alpha="0.6"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="350dp">
+
+            <LinearLayout
+                android:id="@+id/menuItemsContainer"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="#0084C7"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        >
+
+                        <RelativeLayout
+                            android:id="@+id/menuEvents"
+                            android:clickable="true"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp">
+
+                            <ImageView
+                                android:id="@+id/menuEventsImg"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/mail_icon"
+                                android:layout_centerVertical="true"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:id="@+id/seeAlEventsText"
+                                android:layout_toRightOf="@+id/menuEventsImg"
+                                android:layout_centerVertical="true"
+                                android:text="Ver Todos"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#FFFFFF"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <RelativeLayout
+                                android:layout_alignParentBottom="true"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"></RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/menuMap"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp">
+
+                            <ImageView
+                                android:id="@+id/mapImg"
+                                android:src="@drawable/person_icon"
+                                android:layout_marginLeft="5dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:id="@+id/mapText"
+                                android:layout_toRightOf="@+id/mapImg"
+                                android:layout_centerVertical="true"
+                                android:text="Ver en Mapa"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#FFFFFF"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <RelativeLayout
+                                android:layout_alignParentBottom="true"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"></RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/menuMyTickets"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp">
+
+                            <ImageView
+                                android:id="@+id/myTicketsImg"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/person_icon"
+                                android:layout_centerVertical="true"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:id="@+id/myTicketsText"
+                                android:layout_toRightOf="@+id/myTicketsImg"
+                                android:layout_centerVertical="true"
+                                android:text="Mis Tickets"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#FFFFFF"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <RelativeLayout
+                                android:layout_alignParentBottom="true"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"></RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/menuHistoricalTickets"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp">
+
+                            <ImageView
+                                android:id="@+id/menuHistoricalTicketsImg"
+                                android:src="@drawable/person_icon"
+                                android:layout_marginLeft="5dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_toRightOf="@+id/menuHistoricalTicketsImg"
+                                android:layout_centerVertical="true"
+                                android:text="Historial de Eventos"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#FFFFFF"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <RelativeLayout
+                                android:layout_alignParentBottom="true"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"></RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/menuProfile"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp">
+
+                            <ImageView
+                                android:id="@+id/profileImage"
+                                android:src="@drawable/person_icon"
+                                android:layout_marginLeft="5dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_toRightOf="@+id/profileImage"
+                                android:layout_centerVertical="true"
+                                android:text="Ver/editar Perfil "
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#FFFFFF"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <RelativeLayout
+                                android:layout_alignParentBottom="true"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"></RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_weight="0.2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/closeMenuBtn"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/close_menu_btn"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:background="#0084C7"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

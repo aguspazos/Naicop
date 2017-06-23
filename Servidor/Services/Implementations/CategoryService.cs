@@ -33,6 +33,22 @@ namespace Services.Implementations
             return category;
         }
 
+        public bool Delete(Category category)
+        {
+            Category myCategory = unitOfWork.CategoryRepository.GetByID(category.ID);
+            if(myCategory != null)
+            {
+                myCategory.Deleted = 1;
+                myCategory.UpdatedOn = DateTime.Now;
+                unitOfWork.CategoryRepository.Update(category);
+                unitOfWork.Save();
+                return true;
+            }
+            return false;
+                
+                
+        }
+
         public List<Category> GetAll()
         {
             return unitOfWork.CategoryRepository.Get().ToList();

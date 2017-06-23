@@ -11,5 +11,6 @@ namespace Services
     {
         Category CreateCategory(Category category);
         List<Category> GetAll();
+        bool Delete(Category category);
     }
 }

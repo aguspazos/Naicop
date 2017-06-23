@@ -95,6 +95,15 @@ namespace Services.Implementations
 
         }
 
+        public Ticket ScanTicket(Ticket ticket)
+        {
+            ticket.Used = 1;
+            ticket.UpdatedOn = DateTime.Now;
+            unitOfWork.TicketRepository.Update(ticket);
+            unitOfWork.Save();
+            return ticket;
+        }
+
         public Ticket MakePayment(Ticket ticket)
         {
             ticket = unitOfWork.TicketRepository.GetByID(ticket.ID);

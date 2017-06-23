@@ -44,11 +44,7 @@ public abstract class Login {
                             User user = new User(jsonResponse);
                             success(user);
                         } catch (JSONException e) {
-                            if (activity != null) {
-                                e.printStackTrace();
-                                Toast toast = Toast.makeText(context, "Error inesperado (JSONException)", Toast.LENGTH_SHORT);
-                                toast.show();
-                            }
+                            error("Error inesperado, verifique su conexion a internet");
                         }
                     }
                 },
@@ -56,10 +52,10 @@ public abstract class Login {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        String dataStr = "";
                         if (error != null) {
                             if (error.networkResponse != null) {
                                 byte[] data = error.networkResponse.data;
-                                String dataStr = null;
                                 try {
                                     dataStr = new String(data, "UTF-8");
                                 } catch (UnsupportedEncodingException e) {
@@ -68,12 +64,7 @@ public abstract class Login {
                                 Log.v("Error - DATA", dataStr);
                             }
                         }
-
-                        if (activity != null) {
-
-                            Toast toast = Toast.makeText(context, "Error inesperado (VolleyError)", Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
+                        error("Usuario o contrasena invalidos");
                     }
                 }
         ) {
@@ -88,4 +79,5 @@ public abstract class Login {
     }
 
     public abstract void success(User user);
+    public abstract void error(String message);
 }

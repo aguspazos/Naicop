@@ -37,7 +37,7 @@ namespace Web.Api.Test
 
             var controller = new SecurityClientsController(mockSecurityClientService.Object);
 
-            IHttpActionResult actionResult = controller.Post(securityClient);
+            IHttpActionResult actionResult = controller.login("email","pass");
             OkNegotiatedContentResult<SecurityClient> contentResult = Assert.IsType<OkNegotiatedContentResult<SecurityClient>>(actionResult);
             Assert.NotNull(contentResult);
             Assert.NotNull(contentResult.Content);

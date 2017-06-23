@@ -17,15 +17,15 @@ import org.json.JSONObject;
  */
 public class LoadingActivityHandler {
 
-    public NaicopActivity activity;
+    public Activity activity;
 
-    public LoadingActivityHandler(NaicopActivity activity){
+    public LoadingActivityHandler(Activity activity){
         this.activity =activity;
     }
 
     public void checkToken(){
 
-        final String token = Config.getSavedToken(activity.context);
+        final String token = Config.getSavedToken(activity.getApplicationContext());
         if (token.equals("")){
             Intent intent = new Intent(activity, LoginActivity.class);
             activity.startActivity(intent);
@@ -33,14 +33,21 @@ public class LoadingActivityHandler {
             new CheckToken(activity, token) {
                 @Override
                 public void userLogged(JSONObject response) {
-                    new UpdateDevice(activity,token);
+                    new UpdateDevice(activity, token) {
+                        @Override
+                        public void finished() {
+
+                        }
+                    };
                 }
 
                 @Override
                 public void userNotLogged() {
                     DatabaseHelper.getInstance().DropDatabaseForLogout();
-                    Config.resetLastUpdated(activity.context);
+                    Config.resetLastUpdated(activity.getApplicationContext());
+                    Config.updateSavedToken(activity.getApplicationContext(),"");
                     Intent intent = new Intent(activity,LoginActivity.class);
+                    activity.finish();
                     activity.startActivity(intent);
                 }
             };

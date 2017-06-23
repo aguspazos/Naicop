@@ -34,15 +34,25 @@ public abstract class RegisterUser {
         params = new HashMap<String, String>();
         params.put("email",user.email);
         params.put("password",user.password);
+        params.put("phone",user.phone);
+        params.put("name",user.name);
+        params.put("lastName",user.lastName);
+        params.put("facebookId",user.facebookId);
+
         String url = Constants.DOMAIN + "/api/users";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            User user = new User(jsonResponse);
-                            userRegistered(user);
+                            if(jsonResponse.has("Status") && jsonResponse.getString("Status").equals("Ok")) {
+                                User user = new User(jsonResponse);
+                                userRegistered(user);
+                            }else{
+                                registerError(jsonResponse.getString("Entity"));
+                            }
                         } catch (JSONException e) {
                             if (activity != null) {
                                 e.printStackTrace();
@@ -56,10 +66,10 @@ public abstract class RegisterUser {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        String dataStr = "";
                         if (error != null) {
                             if (error.networkResponse != null) {
                                 byte[] data = error.networkResponse.data;
-                                String dataStr = null;
                                 try {
                                     dataStr = new String(data, "UTF-8");
                                 } catch (UnsupportedEncodingException e) {
@@ -68,12 +78,7 @@ public abstract class RegisterUser {
                                 Log.v("Error - DATA", dataStr);
                             }
                         }
-
-                        if (activity != null) {
-
-                            Toast toast = Toast.makeText(context, "Error inesperado (VolleyError)", Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
+                        registerError("Error inesperado, verifique su conexion a internet");
                     }
                 }
         ) {
@@ -88,5 +93,6 @@ public abstract class RegisterUser {
     }
 
     public abstract void userRegistered(User user);
+    public abstract void registerError(String message);
 
 }

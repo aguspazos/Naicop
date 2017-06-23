@@ -197,4 +197,21 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
+    <include
+        layout="@layout/menu_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        />
+    <include
+        layout="@layout/alert"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/alertContainer"
+        />
+    <include
+        layout="@layout/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loaderContainer"/>
 </RelativeLayout>

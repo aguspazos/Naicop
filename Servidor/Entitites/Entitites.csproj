@@ -54,6 +54,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="ClientUser.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="Exceptions\ClientUserException.cs" />
     <Compile Include="Exceptions\SecurityClientException.cs" />
     <Compile Include="Exceptions\TicketException.cs" />
     <Compile Include="Exceptions\UserException.cs" />

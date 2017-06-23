@@ -24,12 +24,6 @@ namespace NaicopServer.Controllers
             this.categoryService = categoryService;
         }
 
-        // GET api/<controller>/id
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<controller>
         [Route("api/categories")]
         [HttpPost]
@@ -39,15 +33,24 @@ namespace NaicopServer.Controllers
             return Ok(category);
 
         }
-
-        // PUT api/<controller>/id
-        public void Put(int id, [FromBody]string value)
+        [Route("api/categories")]
+        [HttpGet]
+        public IHttpActionResult Get()
         {
+            List<Category> categories = categoryService.GetAll();
+            return Ok(categories);
+
+        }
+        [Route("api/categories/delete")]
+        [HttpPost]
+        public IHttpActionResult Delete([FromBody]Category category)
+        {
+            bool deleted = categoryService.Delete(category);
+            if (deleted)
+                return Ok();
+            else
+                return NotFound();
         }
 
-        // DELETE api/<controller>/id
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -1,9 +1,13 @@
 package com.naicop.naicopapp.Activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,14 +49,32 @@ public class MapActivity extends NaicopActivity implements GoogleMap.OnMapClickL
         setContentView(R.layout.activity_map);
         findViewsById();
         setMapMenu();
-        //eventArrayList = handler.getEvents();
+        setBehaviour();
+
+        eventArrayList = handler.getEvents();
         if (Permissions.accessFineLocationPermissionEnabled(this)) {
             userLocation = handler.getUserLocation();
+            if(userLocation == null){
+                userLocation = new Location("Service Provider");
+                userLocation.setLatitude(-34.903717);
+                userLocation.setLongitude(-56.190673);
+            }
+
             setMap();
+
         } else {
             Permissions.requestAccessFineLocationPermission(this);
         }
 
+    }
+
+    private void setBehaviour(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void findViewsById() {
@@ -74,11 +96,6 @@ public class MapActivity extends NaicopActivity implements GoogleMap.OnMapClickL
     @Override
     public void onMapReady(GoogleMap map) {
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userLocation.getLatitude(), userLocation.getLongitude()), 14));
-        eventArrayList = new ArrayList<>();
-        eventArrayList.add(new Event("-34.883206", "-56.056027", "Punchi", 600, "La mejor fiesta en años", "27/08/2017"));
-        eventArrayList.add(new Event("-34.880583", "-56.049676", "Cachengue", 350, "Fiesta para re mamarse", "25/07/2017"));
-        eventArrayList.add(new Event("-34.877634", "-56.054504", "Fiesta Swinger", 2000, "Vas a coger y te van a coger", "12/07/2017"));
-        eventArrayList.add(new Event("-34.874615", "-56.061553", "Rombai", 400, "De fiesta!", "25/06/2017"));
         for (Event event : eventArrayList) {
             try {
                 LatLng eventLocation = new LatLng(Double.parseDouble(event.latitude), Double.parseDouble(event.longitude));
@@ -116,16 +133,16 @@ public class MapActivity extends NaicopActivity implements GoogleMap.OnMapClickL
         eventNameTextView.setText(event.title);
         eventDateTextView.setText(event.startDate);
         eventDescriptionTextView.setText(event.description);
-        eventPriceTextView.setText("$ "+String.valueOf(event.price));
+        eventPriceTextView.setText("$ " + String.valueOf(event.price));
         return false;
     }
 
-    private void setMarkerMenu(){
+    private void setMarkerMenu() {
         mapMenu.setVisibility(View.GONE);
         markerMenu.setVisibility(View.VISIBLE);
     }
 
-    private void setMapMenu(){
+    private void setMapMenu() {
         mapMenu.setVisibility(View.VISIBLE);
         markerMenu.setVisibility(View.GONE);
     }
