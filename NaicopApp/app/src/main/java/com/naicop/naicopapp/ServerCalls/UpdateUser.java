@@ -35,8 +35,9 @@ public abstract class UpdateUser {
         params.put("Phone",user.phone);
         params.put("Name",user.name);
         params.put("LastName",user.lastName);
-        String url = Constants.DOMAIN + "/api/users/"+token;
-        StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
+        params.put("Token",user.token);
+        String url = Constants.DOMAIN + "/api/users/save";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -69,7 +70,7 @@ public abstract class UpdateUser {
                                 Log.v("Error - DATA", dataStr);
                             }
                         }
-                        error("Usuario o contrasena invalidos");
+                        error("Error inesperado, verifique su conexion a internet");
                     }
                 }
         ) {

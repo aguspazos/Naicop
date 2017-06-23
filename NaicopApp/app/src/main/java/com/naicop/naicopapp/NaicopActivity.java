@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.naicop.naicopapp.Widgets.AlertPopUp;
+import com.naicop.naicopapp.Widgets.Loader;
 import com.naicop.naicopapp.Widgets.MenuBar;
 
 public class NaicopActivity extends Activity {
@@ -13,6 +14,7 @@ public class NaicopActivity extends Activity {
     public Context context;
     protected MenuBar menuBar;
     public AlertPopUp alertPopUp;
+    public Loader loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +27,7 @@ public class NaicopActivity extends Activity {
         menuBar.comeToLife();
         alertPopUp = new AlertPopUp(this,context);
         alertPopUp.comeToLife();
+        loader = new Loader(this,context);
+        loader.comeToLife();
     }
 }

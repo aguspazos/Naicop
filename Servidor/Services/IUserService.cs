@@ -14,6 +14,6 @@ namespace Services
         User GetFromToken(string token);
 
         User FacebookLogin(User user);
-        User UpdateUser(string token, User user);
+        User UpdateUser( User user);
     }
 }

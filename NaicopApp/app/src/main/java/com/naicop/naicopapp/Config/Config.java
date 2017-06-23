@@ -38,7 +38,7 @@ public class Config {
     public static void resetLastUpdated(Context context){
         SharedPreferences sp = context.getSharedPreferences(context.getString( R.string.preferences), 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putString("lastUpdated","0000-00-00 00:00:00");
+        edit.putString("lastUpdated","1900-01-01 00:00:00");
         edit.commit();
     }
 

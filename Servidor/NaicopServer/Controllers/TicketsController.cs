@@ -63,6 +63,42 @@ namespace NaicopServer.Controllers
             }
 
         }
+        [Route("api/tickets/validateQrCode")]
+        [HttpPost]
+        public IHttpActionResult ValidateQrCode([FromBody]Ticket ticket)
+        {
+            Ticket existingTicket = ticketService.GetByCode(ticket.Code);
+            if (existingTicket == null)
+            {
+                ticketService.ScanTicket(existingTicket);
+                return Ok(new JsonResponse<string>()
+                {
+                    Status = "Error",
+                    Entity = "Acceso denegado"
+                });
+            }
+            else
+            {
+                if (existingTicket.Status == TicketStatus.OK)
+                {
+                    return Ok(new JsonResponse<string>()
+                    {
+                        Status = "Ok",
+                        Entity = "Acceso autorizado"
+                    });
+                }
+                else
+                {
+                    return Ok(new JsonResponse<string>()
+                    {
+                        Status = "Error",
+                        Entity = "No se realizo el pago del ticket"
+                    });
+                }
+            }
+
+
+        }
 
         // PUT api/<controller>/id
         public void Put(int id, [FromBody]string value)

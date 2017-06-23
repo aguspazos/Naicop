@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.naicop.naicopapp.Config.Config;
 import com.naicop.naicopapp.Entitites.User;
 import com.naicop.naicopapp.Exceptions.InvalidUserDataException;
 import com.naicop.naicopapp.Handlers.ProfileActivityHandler;
@@ -65,7 +66,9 @@ public class ProfileActivity extends NaicopActivity {
         String phone = phoneText.getText().toString();
         String name =  nameText.getText().toString();
         String lastName = lastNameText.getText().toString();
-//        handler.save(email,phone,name,lastName);
+        User userToSave = new User(email,phone,name,lastName,"","");
+        userToSave.token = Config.getSavedToken(context);
+        handler.save(userToSave);
     }
 
 }

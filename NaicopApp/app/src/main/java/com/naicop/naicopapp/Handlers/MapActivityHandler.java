@@ -11,6 +11,7 @@ import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.Persistance.EventSQL;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Martin on 20/06/2017.
@@ -28,13 +29,34 @@ public class MapActivityHandler {
 
     public Location getUserLocation(){
         Location userLocation = null;
-        LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager manager = (LocationManager) activity.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         try {
-            userLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            userLocation = getBestLocation();
         } catch (SecurityException ec) {
             return userLocation;
         }
         return userLocation;
+    }
+
+   private Location getBestLocation(){
+       try {
+           LocationManager mLocationManager = (LocationManager) activity.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+           List<String> providers = mLocationManager.getProviders(true);
+           Location bestLocation = null;
+           for (String provider : providers) {
+               Location l = mLocationManager.getLastKnownLocation(provider);
+               if (l == null) {
+                   continue;
+               }
+               if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                   bestLocation = l;
+               }
+           }
+           return bestLocation;
+       }catch (SecurityException ex){
+           ex.printStackTrace();
+           return null;
+       }
     }
 
     public ArrayList<Event> getEvents(){

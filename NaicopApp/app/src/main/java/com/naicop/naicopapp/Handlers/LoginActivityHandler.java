@@ -22,24 +22,32 @@ import org.json.JSONObject;
  */
 public class LoginActivityHandler {
 
-    protected NaicopActivity activity;
+    protected NaicopActivity thisActivity;
     public LoginActivityHandler(NaicopActivity activity){
-        this.activity =activity;
+        this.thisActivity =activity;
     }
 
     public void LoginAction(String email,String password) throws InvalidLoginDataException {
         validateMail(email);
-        new Login(activity, email, password) {
+        new Login(thisActivity, email, password) {
             @Override
             public void success(User user) {
-                Config.updateSavedToken(activity.context,user.token);
-                Config.setCurrentUserId(activity.context,user.id);
-                new UpdateDevice(activity,user.token);
+
+                thisActivity.loader.show();
+                Config.updateSavedToken(thisActivity.context,user.token);
+                Config.setCurrentUserId(thisActivity.context,user.id);
+                new UpdateDevice(thisActivity, user.token) {
+                    @Override
+                    public void finished() {
+                        thisActivity.loader.hide();
+                    }
+                };
             }
 
             @Override
             public void error(String message) {
-                activity.alertPopUp.show(message);
+                thisActivity.loader.hide();
+                thisActivity.alertPopUp.show(message);
             }
         };
     }
@@ -56,17 +64,25 @@ public class LoginActivityHandler {
         String lastName = jsonUser.getString("last_name");
         String facebookId = jsonUser.getString("id");
 
-        new FacebookLogin(activity, new User(email, phone, name, lastName,"-", facebookId)) {
+        thisActivity.loader.show();
+        new FacebookLogin(thisActivity, new User(email, phone, name, lastName,"-", facebookId)) {
             @Override
             public void userRegistered(User user) {
-                Config.updateSavedToken(activity.context,user.token);
-                Config.setCurrentUserId(activity.context,user.id);
-                new UpdateDevice(activity,user.token);
+                Config.updateSavedToken(thisActivity.context,user.token);
+                Config.setCurrentUserId(thisActivity.context,user.id);
+                new UpdateDevice(thisActivity, user.token) {
+                    @Override
+                    public void finished() {
+                        thisActivity.loader.hide();
+                    }
+                };
             }
 
             @Override
-            public void error(String message) {
-                activity.alertPopUp.show(message);
+            public void error(String message)
+            {
+                thisActivity.loader.hide();
+                thisActivity.alertPopUp.show(message);
             }
         };
 

@@ -13,10 +13,10 @@ import com.naicop.naicopapp.ServerCalls.UpdateDevice;
  */
 public class RegisterActivityHandler {
 
-    protected NaicopActivity activity;
+    protected NaicopActivity thisActivity;
 
     public RegisterActivityHandler(NaicopActivity activity){
-        this.activity =activity;
+        this.thisActivity =activity;
     }
 
     public void register(String email,String phone,String name,String lastName,String password,String repeatPassword) throws InvalidUserDataException {
@@ -26,17 +26,24 @@ public class RegisterActivityHandler {
         validateEmptyText(lastName);
         validatePassword(password,repeatPassword);
         User user = new User(email,phone,name,lastName,password,"");
-        new RegisterUser(activity, user) {
+        new RegisterUser(thisActivity, user) {
             @Override
             public void userRegistered(User user) {
-                Config.updateSavedToken(activity.context,user.token);
-                Config.setCurrentUserId(activity.context,user.id);
-                new UpdateDevice(activity,user.token);
+                thisActivity.loader.show();
+                Config.updateSavedToken(thisActivity.context,user.token);
+                Config.setCurrentUserId(thisActivity.context,user.id);
+                new UpdateDevice(thisActivity, user.token) {
+                    @Override
+                    public void finished() {
+                        thisActivity.loader.hide();
+                    }
+                };
             }
 
             @Override
             public void registerError(String message) {
-                activity.alertPopUp.show(message);
+                thisActivity.loader.hide();
+                thisActivity.alertPopUp.show(message);
             }
         };
     }

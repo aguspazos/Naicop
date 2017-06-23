@@ -16,6 +16,7 @@ import com.naicop.naicopapp.Config.Config;
 import com.naicop.naicopapp.Config.Constants;
 import com.naicop.naicopapp.Entitites.Event;
 import com.naicop.naicopapp.Entitites.User;
+import com.naicop.naicopapp.NaicopActivity;
 import com.naicop.naicopapp.Persistance.CategorySQL;
 import com.naicop.naicopapp.Persistance.DatabaseHelper;
 import com.naicop.naicopapp.Persistance.EventSQL;
@@ -32,14 +33,14 @@ import java.util.Map;
 /**
  * Created by pazos on 18-Jun-17.
  */
-public class UpdateDevice {
+public abstract class UpdateDevice {
     protected  Activity activity;
     protected  Context context;
     protected  Map<String, String> params;
     protected String prefsLastUpdated;
 
 
-    public UpdateDevice(final Activity activity,String token) {
+    public UpdateDevice(final Activity activity, String token) {
         prefsLastUpdated="1900-01-01 00:00:00";
         this.activity = activity;
         this.context = activity.getApplicationContext();
@@ -95,6 +96,7 @@ public class UpdateDevice {
                                 e.printStackTrace();
                             }
                         }
+                        finished();
                         Config.setLastUpdated(context,prefsLastUpdated);
                         Intent intent = new Intent(activity,EventsActivity.class);
                         activity.finish();
@@ -117,6 +119,7 @@ public class UpdateDevice {
                                 Log.v("Error - DATA", dataStr);
                             }
                         }
+                        finished();
                         Intent intent = new Intent(activity, EventsActivity.class);
                         activity.startActivity(intent);
                     }
@@ -135,5 +138,7 @@ public class UpdateDevice {
         if(lastUpdated.compareTo(prefsLastUpdated)>0)
             prefsLastUpdated = lastUpdated;
     }
+
+    public abstract void finished();
 
 }

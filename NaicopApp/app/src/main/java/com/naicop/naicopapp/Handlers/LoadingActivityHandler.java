@@ -33,7 +33,12 @@ public class LoadingActivityHandler {
             new CheckToken(activity, token) {
                 @Override
                 public void userLogged(JSONObject response) {
-                    new UpdateDevice(activity,token);
+                    new UpdateDevice(activity, token) {
+                        @Override
+                        public void finished() {
+
+                        }
+                    };
                 }
 
                 @Override

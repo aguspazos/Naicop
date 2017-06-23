@@ -21,24 +21,29 @@ public abstract class ProfileActivityHandler {
     }
 
     public void obtainUser(){
+        activity.loader.show();
 
         new GetUser(activity, Config.getSavedToken(activity.context)) {
             @Override
             public void success(User user) {
+                activity.loader.hide();
                 userObtained(user);
             }
 
             @Override
             public void error(String message) {
+                activity.loader.hide();
                 activity.alertPopUp.show(message);
             }
         };
     }
 
     public void save(User user){
+        activity.loader.show();
         new UpdateUser(activity, Config.getSavedToken(activity.context), user) {
             @Override
             public void success(User user) {
+                activity.loader.hide();
                 Intent intent = new Intent(activity, ProfileActivity.class);
                 activity.finish();
                 activity.startActivity(intent);
@@ -46,6 +51,7 @@ public abstract class ProfileActivityHandler {
 
             @Override
             public void error(String message) {
+                activity.loader.hide();
                 activity.alertPopUp.show(message);
             }
         };

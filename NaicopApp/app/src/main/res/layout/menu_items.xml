@@ -62,7 +62,7 @@
                             <ImageView
                                 android:id="@+id/menuEventsImg"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/person_icon"
+                                android:src="@drawable/mail_icon"
                                 android:layout_centerVertical="true"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp" />
@@ -132,7 +132,7 @@
                             <ImageView
                                 android:id="@+id/myTicketsImg"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/mail_icon"
+                                android:src="@drawable/person_icon"
                                 android:layout_centerVertical="true"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp" />
@@ -160,13 +160,13 @@
 
 
                         <RelativeLayout
-                            android:id="@+id/menuChangePassword"
+                            android:id="@+id/menuHistoricalTickets"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="55dp">
 
                             <ImageView
-                                android:id="@+id/changePasswordImg"
+                                android:id="@+id/menuHistoricalTicketsImg"
                                 android:src="@drawable/person_icon"
                                 android:layout_marginLeft="5dp"
                                 android:layout_centerVertical="true"
@@ -174,9 +174,9 @@
                                 android:layout_height="30dp" />
 
                             <TextView
-                                android:layout_toRightOf="@+id/changePasswordImg"
+                                android:layout_toRightOf="@+id/menuHistoricalTicketsImg"
                                 android:layout_centerVertical="true"
-                                android:text="Cambiar Contrasena"
+                                android:text="Historial de Eventos"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginRight="5dp"
                                 android:textColor="#FFFFFF"

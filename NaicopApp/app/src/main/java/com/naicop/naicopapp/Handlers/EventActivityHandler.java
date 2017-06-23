@@ -41,27 +41,32 @@ public class EventActivityHandler {
     }
 
     public void buyTicket(){
+        thisActivity.loader.show();
         new BuyTicket(thisActivity,event.id) {
             @Override
-            public void ticketBought(Ticket ticket) {
+            public void ticketBought(Ticket aTicket) {
+                ticket = aTicket;
                 showMakePaymentPopUp();
-
             }
 
             @Override
             public void error(String message) {
+                thisActivity.loader.hide();
                 thisActivity.alertPopUp.show(message);
             }
         };
     }
 
     public void showMakePaymentPopUp(){
+        thisActivity.loader.hide();
         new MakePaymentPopUp(thisActivity) {
             @Override
             public void makePayment(Ticket ticket) {
+                thisActivity.loader.show();
                 new MakePayment(activity,ticket) {
                     @Override
                     public void paymentMade(Ticket ticket) {
+                        thisActivity.loader.hide();
                         Intent intent = new Intent(activity,EventActivity.class);
                         intent.putExtra("event_id",ticket.eventId);
                         activity.startActivity(intent);
@@ -69,6 +74,7 @@ public class EventActivityHandler {
 
                     @Override
                     public void error(String message) {
+                        thisActivity.loader.hide();
                         activity.alertPopUp.show(message);
                     }
                 };

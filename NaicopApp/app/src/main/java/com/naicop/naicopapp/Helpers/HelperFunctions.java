@@ -6,6 +6,7 @@ package com.naicop.naicopapp.Helpers;
 public class HelperFunctions {
 
     public static boolean validEmail(String email){
+
         return true;
     }
 
