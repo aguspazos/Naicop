@@ -8,6 +8,7 @@ import com.naicop.naicopsecurityclient.Activities.LoginActivity;
 import com.naicop.naicopsecurityclient.Activities.MainActivity;
 import com.naicop.naicopsecurityclient.Config.Config;
 import com.naicop.naicopsecurityclient.ServerCalls.CheckToken;
+import com.naicop.naicopsecurityclient.ServerCalls.Login;
 
 import org.json.JSONObject;
 
@@ -26,7 +27,7 @@ public class LoadingActivityHandler {
     public void checkToken(){
         final String token = Config.getSavedToken(activity);
         if (token.equals("")){
-            Intent intent = MainActivity.getStartIntent(activity);
+            Intent intent = LoginActivity.getStartIntent(activity);
             activity.startActivity(intent);
         }else {
             new CheckToken(activity, token) {

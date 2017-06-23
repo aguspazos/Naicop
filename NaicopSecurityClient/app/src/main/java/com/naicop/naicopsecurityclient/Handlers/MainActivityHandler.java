@@ -15,9 +15,9 @@ import com.naicop.naicopsecurityclient.ServerCalls.ScanQr;
 
 public class MainActivityHandler {
 
-    private Activity activity;
+    private MainActivity activity;
 
-    public MainActivityHandler(Activity activity){
+    public MainActivityHandler(MainActivity activity){
         this.activity= activity;
     }
 

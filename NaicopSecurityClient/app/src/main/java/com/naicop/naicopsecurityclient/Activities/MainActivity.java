@@ -23,7 +23,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler, ActivityCompat.OnRequestPermissionsResultCallback{
 
-    private ZXingScannerView scannerView;
+    public ZXingScannerView scannerView;
     private TextView scanButton;
     private MainActivityHandler handler;
 
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private void QrScanner(){
         if(Permissions.cameraPermissionEnabled(this)){
             scannerView = new ZXingScannerView(this);
-            setContentView(scannerView);
             scannerView.setResultHandler(this);
+            setContentView(scannerView);
             scannerView.startCamera();
         }else{
             Permissions.requestCameraPermission(this);

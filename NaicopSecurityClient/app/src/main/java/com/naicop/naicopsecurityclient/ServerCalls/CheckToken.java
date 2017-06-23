@@ -42,8 +42,8 @@ public abstract class CheckToken {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            if(jsonResponse.has("status")){
-                                String status = jsonResponse.getString("status");
+                            if(jsonResponse.has("Status")){
+                                String status = jsonResponse.getString("Status");
                                 if(status.equals("Ok")){
                                     userLogged(jsonResponse);
                                 }else{

@@ -10,7 +10,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.naicop.naicopsecurityclient.Activities.LoadingActivity;
 import com.naicop.naicopsecurityclient.Activities.LoginActivity;
+import com.naicop.naicopsecurityclient.Activities.MainActivity;
 import com.naicop.naicopsecurityclient.Config.Constants;
 import com.naicop.naicopsecurityclient.R;
 
@@ -31,35 +33,42 @@ public class ScanQr {
     Map<String, String> params;
 
 
-    public ScanQr(final Activity activity, String code) {
+    public ScanQr(final MainActivity activity, String code) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<>();
-        params.put("token",code);
+        params.put("Code",code);
         String url = Constants.DOMAIN + "/api/tickets/validateQrCode";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            activity.scannerView.stopCamera();
+                            activity.setContentView(R.layout.activity_main);
+                            Intent intent = LoadingActivity.getStartIntent(activity);
+                            activity.startActivity(intent);
                             JSONObject jsonResponse = new JSONObject(response);
-                            if(jsonResponse.has("status")){
-                                String status = jsonResponse.getString("status");
+                            if(jsonResponse.has("Status")){
+                                String status = jsonResponse.getString("Status");
                                 if(status.equals("Ok")){
-                                    activity.setContentView(R.layout.activity_main);
                                     Toast.makeText(activity, "Acceso autorizado", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    activity.setContentView(R.layout.activity_main);
                                     Toast.makeText(activity, "Acceso denegado", Toast.LENGTH_SHORT).show();
                                 }
+                            }else{
+                                Toast.makeText(activity, "Acceso autorizado", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
+                            activity.scannerView.stopCamera();
+                            activity.setContentView(R.layout.activity_main);
+                            Intent intent = LoadingActivity.getStartIntent(activity);
+                            activity.startActivity(intent);
                             if (activity != null) {
                                 e.printStackTrace();
                                 Toast toast = Toast.makeText(context, "Error inesperado", Toast.LENGTH_SHORT);
                                 toast.show();
                             }
-                            activity.setContentView(R.layout.activity_main);
                         }
                     }
                 },
@@ -67,7 +76,10 @@ public class ScanQr {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        activity.scannerView.stopCamera();
                         activity.setContentView(R.layout.activity_main);
+                        Intent intent = LoadingActivity.getStartIntent(activity);
+                        activity.startActivity(intent);
                         if (error != null) {
                             if (error.networkResponse != null) {
                                 byte[] data = error.networkResponse.data;
@@ -82,7 +94,13 @@ public class ScanQr {
                         }
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+        };
+
 
         MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
